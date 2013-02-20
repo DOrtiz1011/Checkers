@@ -1,5 +1,6 @@
-package edu.ncc.checkers;
+package edu.ncc.checkersapi;
 
+import edu.ncc.checkers.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
