@@ -1,3 +1,4 @@
+// http://en.wikipedia.org/wiki/English_draughts
 
 package edu.ncc.checkersapi;
 
@@ -76,10 +77,10 @@ public class CheckerBoard
    {
       int positionIndex = 1;
 
-      numLightMen = 12;
+      numLightMen   = 12;
       numLightKings = 0;
-      numDarkMen = 12;
-      numDarkKings = 0;
+      numDarkMen    = 12;
+      numDarkKings  = 0;
 
       playerTurn = PlayerTurn.DarksTurn;
 
@@ -98,9 +99,11 @@ public class CheckerBoard
             }
             else
             {
+               // This square is playable
                Board[row][col].setPlayable(true);
                Board[row][col].setPosition(positionIndex);
 
+               // set the game pieces to their starting positions
                if (positionIndex < 13)
                {
                   Board[row][col].setSquareContents(SquareContents.DarkMan);
@@ -109,10 +112,36 @@ public class CheckerBoard
                {
                   Board[row][col].setSquareContents(SquareContents.LightMan);
                }
-			   else
-			   {
-			      Board[row][col].setSquareContents(SquareContents.Empty);
-			   }
+               else
+               {
+                  Board[row][col].setSquareContents(SquareContents.Empty);
+               }
+
+               // set the edgetype for the square
+               if (positionIndex < 4)
+               {
+                  Board[row][col].setSquareEdgeType(SquareEdgeType.TopEdge);
+               }
+               else if (positionIndex > 29)
+               {
+                  Board[row][col].setSquareEdgeType(SquareEdgeType.BottomEdge);
+               }
+               else if (positionIndex == 5 || positionIndex == 13 || positionIndex == 21)
+               {
+                  Board[row][col].setSquareEdgeType(SquareEdgeType.LeftEdge);
+               }
+               else if (positionIndex == 12 || positionIndex == 20 || positionIndex == 28)
+               {
+                  Board[row][col].setSquareEdgeType(SquareEdgeType.RightEdge);
+               }
+               else if (positionIndex == 4 || positionIndex == 29)
+               {
+                  Board[row][col].setSquareEdgeType(SquareEdgeType.Corner);
+               }
+               else
+               {
+                  Board[row][col].setSquareEdgeType(SquareEdgeType.NonEdge);
+               }
 
                positionIndex++;
             }

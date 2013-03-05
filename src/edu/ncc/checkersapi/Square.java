@@ -1,14 +1,11 @@
-// http://en.wikipedia.org/wiki/English_draughts
-
 package edu.ncc.checkersapi;
 
 public class Square
 {
-   // Is the square playable? Half the squares on the checker board are not
-   // playable.
+   // Is the square playable? Half the squares on the checker board are not playable.
+   //--------------------------------------------------------------------------------------------------------------
 
-   private boolean playable = false; // default this to false until the board is
-                                     // initialized
+   private boolean playable = false; // default this to false until the board is initialized
 
    public boolean isPlayable()
    {
@@ -20,8 +17,8 @@ public class Square
       this.playable = playable;
    }
 
-   // Each playable square has a position number. This is used for recording
-   // moves.
+   // Each playable square has a position number. This is used for recording moves.
+   //--------------------------------------------------------------------------------------------------------------
 
    private int Position;
 
@@ -46,6 +43,7 @@ public class Square
    }
 
    // What is in the square? This is the standard notation for the game pieces.
+   //--------------------------------------------------------------------------------------------------------------
 
    public enum SquareContents
    {
@@ -71,6 +69,36 @@ public class Square
       if (playable)
       {
          this.squareContents = squareContents;
+      }
+   }
+   
+   // Is the square on the edge of the board. This will be used to simplify game logic.
+   //--------------------------------------------------------------------------------------------------------------
+   
+   public enum SquareEdgeType
+   {
+      NonEdge, TopEdge, BottomEdge, LeftEdge, RightEdge, Corner
+   }
+   
+   private SquareEdgeType squareEdgeType;
+
+   public SquareEdgeType getSquareEdgeType()
+   {
+      SquareEdgeType squareEdgeTypeReturn = SquareEdgeType.NonEdge;
+
+      if (playable)
+      {
+         squareEdgeTypeReturn = squareEdgeType;
+      }
+
+      return squareEdgeTypeReturn;
+   }
+
+   protected void setSquareEdgeType(SquareEdgeType squareEdgeType)
+   {
+      if (playable)
+      {
+         this.squareEdgeType = squareEdgeType;
       }
    }
 }
