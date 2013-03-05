@@ -4,5 +4,9 @@
     <string name="app_name">Checkers</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="light_king">Light King</string>
+    <string name="dark_king">Dark King</string>
 
 </resources>
