@@ -83,12 +83,14 @@ public class CheckerBoard
 
       playerTurn = PlayerTurn.DarksTurn;
 
-      Board = new Square[8][8];
+      Board = new Square[8][8];   // This initializes the pointer for the entire board
 
       for (int row = 0; row < 8; row++)
       {
          for (int col = 0; col < 8; col++)
          {
+            Board[row][col] = new Square();   // Each individual square needs to be intialized.
+
             if ((row + col) % 2 == 0)
             {
                // this is a non-playable square
@@ -99,7 +101,7 @@ public class CheckerBoard
                Board[row][col].setPlayable(true);
                Board[row][col].setPosition(positionIndex);
 
-               if (positionIndex < 12)
+               if (positionIndex < 13)
                {
                   Board[row][col].setSquareContents(SquareContents.DarkMan);
                }
@@ -107,6 +109,10 @@ public class CheckerBoard
                {
                   Board[row][col].setSquareContents(SquareContents.LightMan);
                }
+			   else
+			   {
+			      Board[row][col].setSquareContents(SquareContents.Empty);
+			   }
 
                positionIndex++;
             }
