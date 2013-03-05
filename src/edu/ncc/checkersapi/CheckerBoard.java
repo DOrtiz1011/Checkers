@@ -95,14 +95,8 @@ public class CheckerBoard
          {
             Board[row][col] = new Square();   // Each individual square needs to be initialized.
 
-            if ((row + col) % 2 == 0)
+            if ((row + col) % 2 != 0)
             {
-               // this is a non-playable square
-               Board[row][col].setPlayable(false);
-            }
-            else
-            {
-               // This square is playable
             	//The square is marked as playable and assigned a position index (See image here: http://en.wikipedia.org/wiki/File:Draughts_Notation.svg)
                Board[row][col].setPlayable(true);
                Board[row][col].setPosition(positionIndex);
