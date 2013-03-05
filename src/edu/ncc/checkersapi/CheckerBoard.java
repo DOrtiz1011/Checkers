@@ -6,11 +6,13 @@ import edu.ncc.checkersapi.Square.*;
 
 public class CheckerBoard
 {
-   private int numLightMen;
-   private int numLightKings;
-   private int numDarkMen;
-   private int numDarkKings;
+   private int numLightMen;		//Number of Light Pieces
+   private int numLightKings;	//Number of Light Kings
+   private int numDarkMen;		//Number of Dark Pieces
+   private int numDarkKings;	//Number of Dark Kings
 
+   //Getters & Setters
+   //-----------------------------------------------------------------------------------
    public int getNumLightMen()
    {
       return numLightMen;
@@ -82,15 +84,16 @@ public class CheckerBoard
       numDarkMen    = 12;
       numDarkKings  = 0;
 
-      playerTurn = PlayerTurn.DarksTurn;
+      playerTurn = PlayerTurn.DarksTurn;	//Dark Player goes first
 
       Board = new Square[8][8];   // This initializes the pointer for the entire board
 
+      //Populates the 8x8 board
       for (int row = 0; row < 8; row++)
       {
          for (int col = 0; col < 8; col++)
          {
-            Board[row][col] = new Square();   // Each individual square needs to be intialized.
+            Board[row][col] = new Square();   // Each individual square needs to be initialized.
 
             if ((row + col) % 2 == 0)
             {
@@ -100,22 +103,22 @@ public class CheckerBoard
             else
             {
                // This square is playable
+            	//The square is marked as playable and assigned a position index (See image here: http://en.wikipedia.org/wiki/File:Draughts_Notation.svg)
                Board[row][col].setPlayable(true);
                Board[row][col].setPosition(positionIndex);
 
-               // set the game pieces to their starting positions
-               if (positionIndex < 13)
+               if (positionIndex < 13)		//Populates the top 3 rows of the board with dark pieces
                {
                   Board[row][col].setSquareContents(SquareContents.DarkMan);
                }
-               else if (positionIndex > 20)
+               else if (positionIndex > 20)	//Populates the bottom 3 rows of the board with light pieces
                {
                   Board[row][col].setSquareContents(SquareContents.LightMan);
                }
-               else
-               {
-                  Board[row][col].setSquareContents(SquareContents.Empty);
-               }
+			   else		//Leaves the middle 2 rows empty
+			   {
+			      Board[row][col].setSquareContents(SquareContents.Empty);
+			   }
 
                // set the edgetype for the square
                if (positionIndex < 4)
