@@ -6,10 +6,10 @@ import edu.ncc.checkersapi.Square.*;
 
 public class CheckerBoard
 {
-   private int numLightMen;		//Number of Light Pieces
-   private int numLightKings;	//Number of Light Kings
-   private int numDarkMen;		//Number of Dark Pieces
-   private int numDarkKings;	//Number of Dark Kings
+   private int numLightMen;   //Number of Light Pieces
+   private int numLightKings; //Number of Light Kings
+   private int numDarkMen;    //Number of Dark Pieces
+   private int numDarkKings;  //Number of Dark Kings
 
    //Getters & Setters
    //-----------------------------------------------------------------------------------
@@ -97,22 +97,22 @@ public class CheckerBoard
 
             if ((row + col) % 2 != 0)
             {
-            	//The square is marked as playable and assigned a position index (See image here: http://en.wikipedia.org/wiki/File:Draughts_Notation.svg)
+               //The square is marked as playable and assigned a position index (See image here: http://en.wikipedia.org/wiki/File:Draughts_Notation.svg)
                Board[row][col].setPlayable(true);
                Board[row][col].setPosition(positionIndex);
 
-               if (positionIndex < 13)		//Populates the top 3 rows of the board with dark pieces
+               if (positionIndex < 13)   //Populates the top 3 rows of the board with dark pieces
                {
                   Board[row][col].setSquareContents(SquareContents.DarkMan);
                }
-               else if (positionIndex > 20)	//Populates the bottom 3 rows of the board with light pieces
+               else if (positionIndex > 20)   //Populates the bottom 3 rows of the board with light pieces
                {
                   Board[row][col].setSquareContents(SquareContents.LightMan);
                }
-			   else		//Leaves the middle 2 rows empty
-			   {
-			      Board[row][col].setSquareContents(SquareContents.Empty);
-			   }
+               else   //Leaves the middle 2 rows empty
+               {
+                  Board[row][col].setSquareContents(SquareContents.Empty);
+               }
 
                // set the edgetype for the square
                if (positionIndex < 4)
@@ -131,9 +131,13 @@ public class CheckerBoard
                {
                   Board[row][col].setSquareEdgeType(SquareEdgeType.RightEdge);
                }
-               else if (positionIndex == 4 || positionIndex == 29)
+               else if (positionIndex == 4)
                {
-                  Board[row][col].setSquareEdgeType(SquareEdgeType.Corner);
+                  Board[row][col].setSquareEdgeType(SquareEdgeType.TopRightCorner);
+               }
+               else if (positionIndex == 29)
+               {
+                  Board[row][col].setSquareEdgeType(SquareEdgeType.BottomLeftCorner);
                }
                else
                {

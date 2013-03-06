@@ -77,7 +77,7 @@ public class Square
    
    public enum SquareEdgeType
    {
-      NonEdge, TopEdge, BottomEdge, LeftEdge, RightEdge, Corner
+      NonEdge, TopEdge, BottomEdge, LeftEdge, RightEdge, TopRightCorner, BottomLeftCorner
    }
    
    private SquareEdgeType squareEdgeType;
