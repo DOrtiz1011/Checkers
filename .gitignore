@@ -16,6 +16,7 @@ local.properties
 .settings/
 .loadpath
 gen/
+gen/edu/ncc/checkers/R.java
 
 # External tool builders
 .externalToolBuilders/
