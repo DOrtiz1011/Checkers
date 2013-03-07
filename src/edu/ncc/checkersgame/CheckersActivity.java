@@ -1,4 +1,4 @@
-package edu.ncc.checkersapi;
+package edu.ncc.checkersgame;
 
 import edu.ncc.checkersapi.CheckerBoard;
 import edu.ncc.checkersapi.Square.SquareContents;
@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
+//import android.widget.ImageButton;
 
 
 public class CheckersActivity extends Activity implements OnClickListener {
@@ -43,18 +43,18 @@ public class CheckersActivity extends Activity implements OnClickListener {
         {
         	for(int col=0; col<8; col++)
         	{
-        		if(theBoard.Board[row][col].getSquareContents() != SquareContents.Empty)
+        		if(theBoard.Squares[row][col].getSquareContents() != SquareContents.Empty)
         		{
-        			if(theBoard.Board[row][col].getSquareContents() == SquareContents.LightMan)
+        			if(theBoard.Squares[row][col].getSquareContents() == SquareContents.LightMan)
         				buttons[row][col].setText(R.string.light);
         			else
-        				if(theBoard.Board[row][col].getSquareContents() == SquareContents.DarkMan)
+        				if(theBoard.Squares[row][col].getSquareContents() == SquareContents.DarkMan)
         					buttons[row][col].setText(R.string.dark);
         				else
-        					if(theBoard.Board[row][col].getSquareContents() == SquareContents.LightKing)
+        					if(theBoard.Squares[row][col].getSquareContents() == SquareContents.LightKing)
         						buttons[row][col].setText(R.string.light_king);
         					else
-        						if(theBoard.Board[row][col].getSquareContents() == SquareContents.DarkKing)
+        						if(theBoard.Squares[row][col].getSquareContents() == SquareContents.DarkKing)
         							buttons[row][col].setText(R.string.dark_king);
         		}
         		

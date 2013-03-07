@@ -17,14 +17,14 @@ public class Square
       this.playable = playable;
    }
 
-   // Each playable square has a position number. This is used for recording moves.
+   // Each playable square has a position number. This is used for recording moves. Default value is -1
    //--------------------------------------------------------------------------------------------------------------
 
-   private int Position;
+   private int Position = -1;
 
    public int getPosition()
    {
-      int positionReturn = 0;
+      int positionReturn = -1;
 
       if (playable)
       {
