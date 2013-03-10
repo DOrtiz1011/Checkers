@@ -180,63 +180,80 @@ public class CheckerBoard
       }
    }
    
+   //--------------------------------------------------------------------------------------------------------------
+   //Finds the valid moves for a given square. Doesn't take jumps into consideration yet.
    private void findValidMoves(Square square){
-      int[] tempMoves = {-1,-1,-1,-1};
-      int direction = 0;
-      int offset = 0;
-      boolean isKing = false;
+      int[] tempMoves = {-1,-1,-1,-1};    //Array that holds the position index of up to 4 valid moves. -1 for no move
+      int direction = 0;      //Direction the pieces are moving. 1 for going down, -1 for going up.
+      int offset = 0;         //Number of position indexes away the valid move is. Will either be 3 or 5, depending on the row.
+      boolean isKing = false; //Is the piece in this square a king?
+
       if (square.isPlayable()){
          switch (square.getSquareContents()){
-            case LightMan:
+
+            case LightMan: //Light pieces will travel up the board
                direction = -1;
                break;
-            case DarkMan:
+            case DarkMan:  //Dark pieces will travel down
                direction = 1;
                break;
-            case DarkKing:
-               direction = 1;
+            case DarkKing: //Direction doesn't really matter for Kings
                isKing = true;
                break;
             case LightKing:
-               direction = -1;
                isKing = true;
                break;
          }
-         
-         switch (square.getSquareEdgeType()){
-            case NonEdge:
-               if (square.getPosition()/4 % 2 == 0) offset = 5;
-               else offset = 3;
-               tempMoves[0] = square.getPosition() + (4 * direction);
-               tempMoves[1] = square.getPosition() + (offset * direction);
-               if (isKing){
-                  direction *= -1;
-                  if (offset == 3) offset = 5;
-                  else offset = 3;
-                  tempMoves[2] = square.getPosition() + (4 * direction);
-                  tempMoves[3] = square.getPosition() + (offset * direction);
-               }
-               break;
-            case LeftEdge: case RightEdge:
-               tempMoves[0] = square.getPosition() + (4 * direction);
-               if (isKing) tempMoves[1] = square.getPosition() + (4 * direction * -1);
-               break;
-            case BottomLeftCorner:
-               tempMoves[0] = 25;
-               break;
-            case TopRightCorner:
-               tempMoves[0] = 8;
-               break;
-            case TopEdge:
-               tempMoves[0] = square.getPosition() + 4;
-               tempMoves[1] = square.getPosition() + 5;
-               break;
-            case BottomEdge:
-               tempMoves[0] = square.getPosition() - 4;
-               tempMoves[1] = square.getPosition() - 5;
-               break;
+         if (square.getSquareContents() != SquareContents.Empty){
+            switch (square.getSquareEdgeType()){
+
+               case NonEdge:
+                  //Calculates the row number. If the square is in an even numbered row the offset will be 5
+                  if (square.getPosition()/4 % 2 == 0) offset = 5;
+                  else offset = 3;  //If the square is in an odd numbered row the offset will be 3
+
+                  //Multiply by direction (1 or -1) to determine whether to add or subtract the offsets
+                  tempMoves[0] = square.getPosition() + (4 * direction);   //One of the offsets will always be 4 regardless of row number
+                  tempMoves[1] = square.getPosition() + (offset * direction);
+
+                  if (isKing){   //If the piece is a King, also find moves in the opposite direction
+                     direction *= -1;
+
+                     if (offset == 3) offset = 5;  //When going the other direction, the offset needs to be flipped between 5 and 3
+                     else offset = 3;
+
+                     tempMoves[2] = square.getPosition() + (4 * direction);
+                     tempMoves[3] = square.getPosition() + (offset * direction);
+                  }
+                  break;
+                  
+               //If the square is on an edge, there is a maximum of 2 valid moves.
+               case LeftEdge: case RightEdge:
+                  tempMoves[0] = square.getPosition() + (4 * direction);
+                  if (isKing) tempMoves[1] = square.getPosition() + (4 * direction * -1);
+                  break;
+
+               //Squares in the corners only have one possible move.
+               case BottomLeftCorner:
+                  tempMoves[0] = 25;
+                  break;
+
+               case TopRightCorner:
+                  tempMoves[0] = 8;
+                  break;
+
+               //Squares on the top or bottom edges only have 2 possible moves.
+               case TopEdge:
+                  tempMoves[0] = square.getPosition() + 4;
+                  tempMoves[1] = square.getPosition() + 5;
+                  break;
+               case BottomEdge:
+                  tempMoves[0] = square.getPosition() - 4;
+                  tempMoves[1] = square.getPosition() - 5;
+                  break;
+            }
          }
       }
-      square.setValidMoves(tempMoves);
+      square.setValidMoves(tempMoves);    //Saves the array of valid moves in the square object.
    }
 }

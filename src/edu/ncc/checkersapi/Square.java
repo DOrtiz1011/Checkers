@@ -102,7 +102,7 @@ public class Square
       }
    }
 
-   private int[] validMoves = {-1,-1,-1,-1};
+   private int[] validMoves = {-1,-1,-1,-1};    //Array that holds position indexes of valid moves. -1 for no valid moves.
 
    public int[] getValidMoves() {
       return validMoves;
