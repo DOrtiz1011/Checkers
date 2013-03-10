@@ -71,15 +71,15 @@ public class Square
          this.squareContents = squareContents;
       }
    }
-   
+
    // Is the square on the edge of the board. This will be used to simplify game logic.
    //--------------------------------------------------------------------------------------------------------------
-   
+
    public enum SquareEdgeType
    {
       NonEdge, TopEdge, BottomEdge, LeftEdge, RightEdge, TopRightCorner, BottomLeftCorner
    }
-   
+
    private SquareEdgeType squareEdgeType;
 
    public SquareEdgeType getSquareEdgeType()
@@ -100,5 +100,15 @@ public class Square
       {
          this.squareEdgeType = squareEdgeType;
       }
+   }
+
+   private int[] validMoves = {-1,-1,-1,-1};
+
+   public int[] getValidMoves() {
+      return validMoves;
+   }
+
+   public void setValidMoves(int[] validMoves) {
+      this.validMoves = validMoves;
    }
 }

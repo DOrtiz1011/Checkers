@@ -118,6 +118,8 @@ public class CheckerBoard
                
                setSquareContents(Squares[row][col], positionIndex);
                setSquareEdgeType(Squares[row][col], positionIndex);
+               
+               findValidMoves(Squares[row][col]);
 
                positionIndex++;
             }
@@ -176,5 +178,65 @@ public class CheckerBoard
       {
          square.setSquareEdgeType(SquareEdgeType.NonEdge);
       }
+   }
+   
+   private void findValidMoves(Square square){
+      int[] tempMoves = {-1,-1,-1,-1};
+      int direction = 0;
+      int offset = 0;
+      boolean isKing = false;
+      if (square.isPlayable()){
+         switch (square.getSquareContents()){
+            case LightMan:
+               direction = -1;
+               break;
+            case DarkMan:
+               direction = 1;
+               break;
+            case DarkKing:
+               direction = 1;
+               isKing = true;
+               break;
+            case LightKing:
+               direction = -1;
+               isKing = true;
+               break;
+         }
+         
+         switch (square.getSquareEdgeType()){
+            case NonEdge:
+               if (square.getPosition()/4 % 2 == 0) offset = 5;
+               else offset = 3;
+               tempMoves[0] = square.getPosition() + (4 * direction);
+               tempMoves[1] = square.getPosition() + (offset * direction);
+               if (isKing){
+                  direction *= -1;
+                  if (offset == 3) offset = 5;
+                  else offset = 3;
+                  tempMoves[2] = square.getPosition() + (4 * direction);
+                  tempMoves[3] = square.getPosition() + (offset * direction);
+               }
+               break;
+            case LeftEdge: case RightEdge:
+               tempMoves[0] = square.getPosition() + (4 * direction);
+               if (isKing) tempMoves[1] = square.getPosition() + (4 * direction * -1);
+               break;
+            case BottomLeftCorner:
+               tempMoves[0] = 25;
+               break;
+            case TopRightCorner:
+               tempMoves[0] = 8;
+               break;
+            case TopEdge:
+               tempMoves[0] = square.getPosition() + 4;
+               tempMoves[1] = square.getPosition() + 5;
+               break;
+            case BottomEdge:
+               tempMoves[0] = square.getPosition() - 4;
+               tempMoves[1] = square.getPosition() - 5;
+               break;
+         }
+      }
+      square.setValidMoves(tempMoves);
    }
 }

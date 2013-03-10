@@ -1,8 +1,9 @@
 package edu.ncc.checkersgame;
 
 import edu.ncc.checkersapi.CheckerBoard;
+import edu.ncc.checkersapi.Square;
 import edu.ncc.checkersapi.Square.SquareContents;
-import edu.ncc.checkers.R;
+import edu.ncc.checkersgame.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -45,6 +46,7 @@ public class CheckersActivity extends Activity implements OnClickListener {
         	{
         		if(theBoard.Squares[row][col].getSquareContents() != SquareContents.Empty)
         		{
+               buttons[row][col].setTag(theBoard.Squares[row][col]);
         			if(theBoard.Squares[row][col].getSquareContents() == SquareContents.LightMan)
         				buttons[row][col].setText(R.string.light);
         			else
@@ -76,7 +78,11 @@ public class CheckersActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
-		
+	   Square temp = (Square) arg0.getTag();
+	   System.out.println("Valid Moves for Square #" + temp.getPosition() + ":");
+	   for (int i = 0; i < 4; i++){
+	      System.out.println(temp.getValidMoves()[i]);
+	   }
 	}
     
 }
