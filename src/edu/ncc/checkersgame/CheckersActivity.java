@@ -25,6 +25,10 @@ public class CheckersActivity extends Activity implements OnClickListener {
 
 
       theBoard = new CheckerBoard();
+   }
+   
+   // Creates the buttons for the board. Sets the appropriate buttons to be clickable.
+   protected void createButtons(){
       buttons = new Button [8][8];
       int idIndex = R.id.unplayable_1;
 
@@ -37,6 +41,10 @@ public class CheckersActivity extends Activity implements OnClickListener {
             buttons[row][col].setTag(theBoard.Squares[row][col]);
             idIndex++;
          }
+   }
+   
+   // Checks state of the board for pieces and draws them in the appropriate position on the board.
+   protected void drawBoard(){
 
       for(int row=0; row<8; row++)
       {
