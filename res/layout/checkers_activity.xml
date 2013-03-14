@@ -4,448 +4,308 @@
     android:layout_height="match_parent"
     tools:context=".CheckersActivity" >
 
-
     <TableLayout
-    	android:id="@+id/board"
-    	android:layout_width="wrap_content"
+        android:id="@+id/board"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:stretchColumns="*" >
-        
+
         <TableRow
             android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" >
-        	
+            android:layout_height="wrap_content" >
+
             <Button
                 android:id="@+id/unplayable_1"
-                android:width="60dip"
-                android:height="60dip"
-            	android:background="#FFFFFF"/>
-            	
-            	
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_1"
-                android:width="60dip"
-                android:height="60dip"
-            	android:background="#2D13ED"
-            	/>
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_2"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_2"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_3"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_3"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_4"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_4"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
-            </TableRow>
-            
+                style="@style/STYLE_ButtonPlayable" />
+        </TableRow>
+
         <TableRow
             android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" >
-        	
+            android:layout_height="wrap_content" >
+
             <Button
                 android:id="@+id/playable_5"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_5"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_6"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_6"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_7"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_7"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_8"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_8"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
-            </TableRow>
-            
+                style="@style/STYLE_ButtonUnplayable" />
+        </TableRow>
+
         <TableRow
             android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" >
-        	
+            android:layout_height="wrap_content" >
+
             <Button
                 android:id="@+id/unplayable_9"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_9"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_10"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_10"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_11"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_11"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_12"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_12"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
-            </TableRow>
-            
+                style="@style/STYLE_ButtonPlayable" />
+        </TableRow>
+
         <TableRow
             android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" >
-        	
+            android:layout_height="wrap_content" >
+
             <Button
                 android:id="@+id/playable_13"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_13"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_14"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_14"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_15"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_15"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_16"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_16"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
-            </TableRow>
-            
+                style="@style/STYLE_ButtonUnplayable" />
+        </TableRow>
+
         <TableRow
             android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" >
-        	
+            android:layout_height="wrap_content" >
+
             <Button
                 android:id="@+id/unplayable_17"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_17"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_18"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_18"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_19"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_19"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_20"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_20"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
-            </TableRow>
-            
+                style="@style/STYLE_ButtonPlayable" />
+        </TableRow>
+
         <TableRow
             android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" >
-        	
+            android:layout_height="wrap_content" >
+
             <Button
                 android:id="@+id/playable_21"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_21"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_22"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_22"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_23"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_23"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_24"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_24"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
-            </TableRow>
-            
+                style="@style/STYLE_ButtonUnplayable" />
+        </TableRow>
+
         <TableRow
             android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" >
-        	
+            android:layout_height="wrap_content" >
+
             <Button
                 android:id="@+id/unplayable_25"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_25"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_26"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_26"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_27"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_27"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_28"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_28"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
-            </TableRow>
-            
+                style="@style/STYLE_ButtonPlayable" />
+        </TableRow>
+
         <TableRow
             android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" >
-        	
+            android:layout_height="wrap_content" >
+
             <Button
                 android:id="@+id/playable_29"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_29"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_30"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_30"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_31"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED" />
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_31"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
+                style="@style/STYLE_ButtonUnplayable" />
+
             <Button
                 android:id="@+id/playable_32"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#2D13ED"/>
-            
+                style="@style/STYLE_ButtonPlayable" />
+
             <Button
                 android:id="@+id/unplayable_32"
-                android:width="60dip"
-                android:height="60dip"
-                android:background="#FFFFFF" />
-            
-            </TableRow>
+                style="@style/STYLE_ButtonUnplayable" />
+        </TableRow>
+    </TableLayout>
 
-        </TableLayout>
 </RelativeLayout>
