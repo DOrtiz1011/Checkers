@@ -7,7 +7,7 @@ import edu.ncc.checkersapi.Square.*;
 public class CheckerBoard
 {
    private int numLightMen;   // Number of Light Pieces
-   
+
    public int getNumLightMen()
    {
       return numLightMen;
@@ -17,11 +17,11 @@ public class CheckerBoard
    {
       this.numLightMen = numLightMen;
    }
-   
+
    //--------------------------------------------------------------------------------------------------------------
 
    private int numLightKings;   // Number of Light Kings
-   
+
    public int getNumLightKings()
    {
       return numLightKings;
@@ -31,11 +31,11 @@ public class CheckerBoard
    {
       this.numLightKings = numLightKings;
    }
-   
+
    //--------------------------------------------------------------------------------------------------------------
-   
+
    private int numDarkMen;    // Number of Dark Pieces
-      
+
    public int getNumDarkMen()
    {
       return numDarkMen;
@@ -47,9 +47,9 @@ public class CheckerBoard
    }
 
    //--------------------------------------------------------------------------------------------------------------
-   
+
    private int numDarkKings;   // Number of Dark Kings
-   
+
    public int getNumDarkKings()
    {
       return numDarkKings;
@@ -68,7 +68,7 @@ public class CheckerBoard
    }
 
    private PlayerTurn playerTurn;
-   
+
    public PlayerTurn getPlayerTurn()
    {
       return playerTurn;
@@ -91,7 +91,7 @@ public class CheckerBoard
    // Setup the board for a new game
    // Default constructor returns a board setup for a new game.
    //--------------------------------------------------------------------------------------------------------------
-   
+
    public CheckerBoard()
    {
       int positionIndex = 1;
@@ -115,20 +115,24 @@ public class CheckerBoard
                // The square is marked as playable and assigned a position index (See image here: http://en.wikipedia.org/wiki/File:Draughts_Notation.svg)
                Squares[row][col].setPlayable(true);
                Squares[row][col].setPosition(positionIndex);
-               
+
                setSquareContents(Squares[row][col], positionIndex);
                setSquareEdgeType(Squares[row][col], positionIndex);
-               
-               findValidMoves(Squares[row][col]);
 
                positionIndex++;
             }
          }
       }
+
+      for (int row = 0; row < 8; row++){
+         for (int col = 0; col < 8; col++){
+            findValidMoves(Squares[row][col]);
+         }
+      }
    }
 
    //--------------------------------------------------------------------------------------------------------------
-   
+
    private void setSquareContents(Square square, int positionIndex)
    {
       if (positionIndex < 13)        // Populates the top 3 rows of the board with dark pieces
@@ -144,9 +148,9 @@ public class CheckerBoard
          square.setSquareContents(SquareContents.Empty);
       }
    }
-   
+
    //--------------------------------------------------------------------------------------------------------------
-   
+
    private void setSquareEdgeType(Square square, int positionIndex)
    {
       // set the SquareEdgeType for the square
@@ -179,11 +183,12 @@ public class CheckerBoard
          square.setSquareEdgeType(SquareEdgeType.NonEdge);
       }
    }
-   
+
    //--------------------------------------------------------------------------------------------------------------
    //Finds the valid moves for a given square. Doesn't take jumps into consideration yet.
    private void findValidMoves(Square square){
       int[] tempMoves = {-1,-1,-1,-1};    //Array that holds the position index of up to 4 valid moves. -1 for no move
+      Square[] nextSquares = {null, null, null, null};
       int direction = 0;      //Direction the pieces are moving. 1 for going down, -1 for going up.
       int offset = 0;         //Number of position indexes away the valid move is. Will either be 3 or 5, depending on the row.
       boolean isKing = false; //Is the piece in this square a king?
@@ -226,14 +231,14 @@ public class CheckerBoard
                      tempMoves[3] = square.getPosition() + (offset * direction);
                   }
                   break;
-                  
-               //If the square is on an edge, there is a maximum of 2 valid moves.
+
+                  //If the square is on an edge, there is a maximum of 2 valid moves.
                case LeftEdge: case RightEdge:
                   tempMoves[0] = square.getPosition() + (4 * direction);
                   if (isKing) tempMoves[1] = square.getPosition() + (4 * direction * -1);
                   break;
 
-               //Squares in the corners only have one possible move.
+                  //Squares in the corners only have one possible move.
                case BottomLeftCorner:
                   tempMoves[0] = 25;
                   break;
@@ -242,7 +247,7 @@ public class CheckerBoard
                   tempMoves[0] = 8;
                   break;
 
-               //Squares on the top or bottom edges only have 2 possible moves.
+                  //Squares on the top or bottom edges only have 2 possible moves.
                case TopEdge:
                   tempMoves[0] = square.getPosition() + 4;
                   tempMoves[1] = square.getPosition() + 5;
@@ -252,8 +257,23 @@ public class CheckerBoard
                   tempMoves[1] = square.getPosition() - 5;
                   break;
             }
+
+            for (int i = 0; i < 4; i++){
+               if (tempMoves[i] != -1){
+                  int tempRow = (tempMoves[i]-1)/4;   //Finds the row of the next possible square
+                  int tempCol = -1;
+                  
+                  //Finds the column of the next possible square
+                  if (tempRow % 2 == 0) tempCol = (tempMoves[i] - (tempRow * 4)) * 2 - 1;
+                  else tempCol = ((tempMoves[i] - (tempRow * 4)) - 1) * 2;
+                  
+                  //Adds that square to an array of possible squares
+                  nextSquares[i] = this.Squares[tempRow][tempCol];
+               }
+            }
          }
       }
       square.setValidMoves(tempMoves);    //Saves the array of valid moves in the square object.
+      square.setNextSquares(nextSquares); //Saves the array of squares in the square object.
    }
 }

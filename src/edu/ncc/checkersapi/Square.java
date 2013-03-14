@@ -111,4 +111,14 @@ public class Square
    public void setValidMoves(int[] validMoves) {
       this.validMoves = validMoves;
    }
+
+   private Square[] nextSquares = {null, null, null, null}; //Array that holds the actual squares that can be moved into.
+   
+   public Square[] getNextSquares() {
+      return nextSquares;
+   }
+
+   public void setNextSquares(Square[] nextSquares) {
+      this.nextSquares = nextSquares;
+   }
 }
