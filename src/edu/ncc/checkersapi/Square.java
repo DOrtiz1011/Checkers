@@ -1,9 +1,10 @@
+
 package edu.ncc.checkersapi;
 
 public class Square
 {
    // Is the square playable? Half the squares on the checker board are not playable.
-   //--------------------------------------------------------------------------------------------------------------
+   // --------------------------------------------------------------------------------------------------------------
 
    private boolean playable = false; // default this to false until the board is initialized
 
@@ -18,7 +19,7 @@ public class Square
    }
 
    // Each playable square has a position number. This is used for recording moves. Default value is -1
-   //--------------------------------------------------------------------------------------------------------------
+   // --------------------------------------------------------------------------------------------------------------
 
    private int Position = -1;
 
@@ -43,7 +44,7 @@ public class Square
    }
 
    // What is in the square? This is the standard notation for the game pieces.
-   //--------------------------------------------------------------------------------------------------------------
+   // --------------------------------------------------------------------------------------------------------------
 
    public enum SquareContents
    {
@@ -73,7 +74,7 @@ public class Square
    }
 
    // Is the square on the edge of the board. This will be used to simplify game logic.
-   //--------------------------------------------------------------------------------------------------------------
+   // --------------------------------------------------------------------------------------------------------------
 
    public enum SquareEdgeType
    {
@@ -102,23 +103,33 @@ public class Square
       }
    }
 
-   private int[] validMoves = {-1,-1,-1,-1};    //Array that holds position indexes of valid moves. -1 for no valid moves.
+   //
+   // --------------------------------------------------------------------------------------------------------------
 
-   public int[] getValidMoves() {
+   private int[] validMoves = {-1, -1, -1, -1};    // Array that holds position indexes of valid moves. -1 for no valid moves.
+
+   public int[] getValidMoves()
+   {
       return validMoves;
    }
 
-   public void setValidMoves(int[] validMoves) {
+   public void setValidMoves(int[] validMoves)
+   {
       this.validMoves = validMoves;
    }
 
-   private Square[] nextSquares = {null, null, null, null}; //Array that holds the actual squares that can be moved into.
-   
-   public Square[] getNextSquares() {
+   //
+   // --------------------------------------------------------------------------------------------------------------
+
+   private Square[] nextSquares = {null, null, null, null}; // Array that holds the actual squares that can be moved into.
+
+   public Square[] getNextSquares()
+   {
       return nextSquares;
    }
 
-   public void setNextSquares(Square[] nextSquares) {
+   public void setNextSquares(Square[] nextSquares)
+   {
       this.nextSquares = nextSquares;
    }
 }
