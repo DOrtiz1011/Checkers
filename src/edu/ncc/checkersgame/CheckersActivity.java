@@ -19,6 +19,7 @@ public class CheckersActivity extends Activity implements OnClickListener
 {
    private Button       buttons[][];
    private CheckerBoard theBoard;
+   private Button       selectedButton;
 
    @Override
    protected void onCreate(Bundle savedInstanceState)
@@ -57,40 +58,7 @@ public class CheckersActivity extends Activity implements OnClickListener
       {
          for (int col = 0; col < 8; col++)
          {
-            if (theBoard.Squares[row][col].getSquareContents() == SquareContents.LightMan)
-            {
-               buttons[row][col].setText(R.string.light);
-               buttons[row][col].setBackgroundColor(Color.LTGRAY);
-               buttons[row][col].setTextColor(Color.BLACK);
-            }
-            else if (theBoard.Squares[row][col].getSquareContents() == SquareContents.DarkMan)
-            {
-               buttons[row][col].setText(R.string.dark);
-               buttons[row][col].setBackgroundColor(Color.DKGRAY);
-               buttons[row][col].setTextColor(Color.WHITE);
-            }
-            else if (theBoard.Squares[row][col].getSquareContents() == SquareContents.LightKing)
-            {
-               buttons[row][col].setText(R.string.light_king);
-               buttons[row][col].setBackgroundColor(Color.LTGRAY);
-               buttons[row][col].setTextColor(Color.BLACK);
-            }
-            else if (theBoard.Squares[row][col].getSquareContents() == SquareContents.DarkKing)
-            {
-               buttons[row][col].setText(R.string.dark_king);
-               buttons[row][col].setBackgroundColor(Color.DKGRAY);
-               buttons[row][col].setTextColor(Color.WHITE);
-            }
-            else if (theBoard.Squares[row][col].getSquareContents() == SquareContents.Empty && theBoard.Squares[row][col].isPlayable())
-            {
-               buttons[row][col].setText("");
-               buttons[row][col].setBackgroundColor(Color.BLUE);
-            }
-            else if (theBoard.Squares[row][col].getSquareContents() == SquareContents.Empty && !theBoard.Squares[row][col].isPlayable())
-            {
-               buttons[row][col].setText("");
-               buttons[row][col].setBackgroundColor(Color.WHITE);
-            }
+        	 colorButton(theBoard.Squares[row][col], buttons[row][col]);
          }
       }
    }
@@ -117,6 +85,55 @@ public class CheckersActivity extends Activity implements OnClickListener
          {
             System.out.println(temp.getValidMoves()[i]);
          }
+
+         // highlight the clicked square
+         selectedButton = null;
+         drawBoard();
+         selectedButton = (Button)findViewById(arg0.getId());
+         colorButton(temp, selectedButton);
       }
+   }
+   
+   private void colorButton(Square square, Button button)
+   {
+	   if (square.getSquareContents() == SquareContents.LightMan)
+       {
+		   button.setText(R.string.light);
+		   button.setBackgroundColor(Color.LTGRAY);
+		   button.setTextColor(Color.BLACK);
+       }
+       else if (square.getSquareContents() == SquareContents.DarkMan)
+       {
+    	   button.setText(R.string.dark);
+    	   button.setBackgroundColor(Color.DKGRAY);
+    	   button.setTextColor(Color.WHITE);
+       }
+       else if (square.getSquareContents() == SquareContents.LightKing)
+       {
+    	   button.setText(R.string.light_king);
+    	   button.setBackgroundColor(Color.LTGRAY);
+    	   button.setTextColor(Color.BLACK);
+       }
+       else if (square.getSquareContents() == SquareContents.DarkKing)
+       {
+    	   button.setText(R.string.dark_king);
+    	   button.setBackgroundColor(Color.DKGRAY);
+    	   button.setTextColor(Color.WHITE);
+       }
+       else if (square.getSquareContents() == SquareContents.Empty && square.isPlayable())
+       {
+    	   button.setText("");
+    	   button.setBackgroundColor(Color.BLUE);
+       }
+       else if (square.getSquareContents() == SquareContents.Empty && !square.isPlayable())
+       {
+    	   button.setText("");
+    	   button.setBackgroundColor(Color.WHITE);
+       }
+	   
+	   if (selectedButton != null && button.getId() == selectedButton.getId() && square.getSquareContents() != SquareContents.Empty)
+	   {
+		   button.setBackgroundColor(Color.GREEN);
+	   }
    }
 }
