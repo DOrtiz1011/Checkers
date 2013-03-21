@@ -221,13 +221,15 @@ public class CheckerBoard
             {
                case NonEdge:
                   // Calculates the row number. If the square is in an even numbered row the offset will be 5
-                  if (square.getPosition() / 4 % 2 == 0)
+                  if (((square.getPosition() - 1) / 4) % 2 == 0)
                   {
-                     offset = 5;
+                     if (direction == 1) offset = 5;
+                     else offset = 3;
                   }
                   else
                   {
-                     offset = 3;  // If the square is in an odd numbered row the offset will be 3
+                     if (direction == 1) offset = 3;  // If the square is in an odd numbered row the offset will be 3
+                     else offset = 5;
                   }
 
                   // Multiply by direction (1 or -1) to determine whether to add or subtract the offsets
