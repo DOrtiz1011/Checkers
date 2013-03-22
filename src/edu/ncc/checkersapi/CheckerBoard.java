@@ -85,6 +85,8 @@ public class CheckerBoard
          playerTurn = PlayerTurn.LightsTurn;
       }
    }
+   
+   private boolean jumpAvailable = false; //Is there a jump available?
 
    public Square[][] Squares;
 
@@ -123,6 +125,10 @@ public class CheckerBoard
             }
          }
       }
+      
+      //Temporarily Adds Extra Pieces to allow for jump testing.
+      Squares[4][3].setSquareContents(SquareContents.DarkMan);
+      Squares[3][6].setSquareContents(SquareContents.LightMan);
 
       for (int row = 0; row < 8; row++)
       {
@@ -196,6 +202,8 @@ public class CheckerBoard
       int      direction   = 0;         // Direction the pieces are moving. 1 for going down, -1 for going up.
       int      offset      = 0;         // Number of position indexes away the valid move is. Will either be 3 or 5, depending on the row.
       boolean  isKing      = false;     // Is the piece in this square a king?
+      
+      Square   tempSquare;
 
       if (square.isPlayable())
       {
@@ -287,25 +295,65 @@ public class CheckerBoard
                   break;
             }
 
+            //Checks to see if next valid square has a piece in it or not.
             for (int i = 0; i < 4; i++)
             {
                if (tempMoves[i] != -1)
                {
-                  int tempRow = (tempMoves[i] - 1) / 4;   // Finds the row of the next possible square
-                  int tempCol = -1;
-
-                  // Finds the column of the next possible square
-                  if (tempRow % 2 == 0)
-                  {
-                     tempCol = (tempMoves[i] - (tempRow * 4)) * 2 - 1;
+                  int[] tempCoord = getCoordinates(tempMoves[i]);    //Coordinates of potential move
+                  
+                  tempSquare = Squares[tempCoord[0]][tempCoord[1]];
+                  
+                  SquareContents contents = tempSquare.getSquareContents();
+                  
+                  //If current square contains a dark piece
+                  if (square.getSquareContents() == SquareContents.DarkMan || square.getSquareContents() == SquareContents.DarkKing){
+                     switch (contents){
+                        //If the potential square contains another dark piece, that square isn't a valid move
+                        case DarkMan:
+                        case DarkKing:
+                           tempSquare = null;
+                           tempMoves[i] = -1;
+                           break;
+                        //If the potential square contains a light piece, checks to see if a jump is possible
+                        case LightMan:
+                        case LightKing:
+                           tempSquare = checkForJump(square, tempSquare); 
+                           
+                           //If a jump is possible (tempSquare isn't null)
+                           if (tempSquare != null){
+                              jumpAvailable = true;
+                              tempMoves[i] = tempSquare.getPosition();
+                           }
+                           else tempMoves[i] = -1;
+                           break;
+                     }
                   }
-                  else
-                  {
-                     tempCol = ((tempMoves[i] - (tempRow * 4)) - 1) * 2;
+                  //If the current square contains a light piece
+                  else{
+                     switch (contents){
+                        //If the potential square contains a dark piece, checks to see if a jump is possible
+                        case DarkMan:
+                        case DarkKing:
+                           tempSquare = checkForJump(square, tempSquare);
+                           if (tempSquare != null){
+                              jumpAvailable = true;
+                              tempMoves[i] = tempSquare.getPosition();
+                           }
+                           else tempMoves[i] = -1;
+                           break;
+                        //If the potential square contains another light piece, that square isn't a valid move
+                        case LightMan:
+                        case LightKing:
+                           tempSquare = null;
+                           tempMoves[i] = -1;
+                           break;
+                     }
+                     
                   }
 
                   // Adds that square to an array of possible squares
-                  nextSquares[i] = this.Squares[tempRow][tempCol];
+                  nextSquares[i] = tempSquare;
                }
             }
          }
@@ -313,5 +361,58 @@ public class CheckerBoard
 
       square.setValidMoves(tempMoves);    // Saves the array of valid moves in the square object.
       square.setNextSquares(nextSquares); // Saves the array of squares in the square object.
+   }
+
+   //Checks to see if a jump is possible. Returns the square to jump to if possible, null if not
+   private Square checkForJump(Square square, Square tempSquare) {
+      int[] squareCoord = getCoordinates(square);
+      int[] targetCoord = getCoordinates(tempSquare);
+      
+      int squareNum = coordToNum(squareCoord);
+      int targetNum = coordToNum(targetCoord);
+      
+      int distance = squareNum - targetNum;
+      
+      int[] checkCoord = numToCoord(targetNum - distance);
+      Square checkSquare = Squares[checkCoord[0]][checkCoord[1]];
+      if (checkSquare.getSquareContents() == SquareContents.Empty) return checkSquare;
+      return null;
+   }
+
+   //Converts a square number to coordinates (row and col)
+   private int[] numToCoord(int i) {
+      int coord[] = {-1, -1};
+      coord[0] = i/8;
+      coord[1] = i - (coord[0] * 8);
+      return coord;
+   }
+
+   //Converts coordinates to a square number (helps in figuring out moves)
+   //Square number: Top left corner square is 0, increments sequentially ending with the bottom right square being 63
+   //Unplayable squares have numbers too.
+   private int coordToNum(int[] coordinates) {
+      return (coordinates[0] * 8) + (coordinates[1]);
+   }
+
+   //Gets the coordinates of a square (row and col numbers) of a given square
+   private int[] getCoordinates(Square square) {
+      return getCoordinates(square.getPosition());
+   }
+   
+   //Gets the coordinates of a square (row and col) of a square with the given position
+   private int[] getCoordinates(int position){
+      int[] coordinates = {-1, -1};
+      coordinates[0] = (position - 1) / 4;   // Finds the row of the next possible square
+
+      // Finds the column of the next possible square
+      if (coordinates[0] % 2 == 0)
+      {
+         coordinates[1] = (position - (coordinates[0] * 4)) * 2 - 1;
+      }
+      else
+      {
+         coordinates[1] = (position - ((coordinates[0] * 4)) - 1) * 2;
+      }
+      return coordinates;
    }
 }
