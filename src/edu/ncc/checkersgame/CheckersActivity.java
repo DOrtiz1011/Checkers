@@ -58,7 +58,7 @@ public class CheckersActivity extends Activity implements OnClickListener
       {
          for (int col = 0; col < 8; col++)
          {
-        	 colorButton(theBoard.Squares[row][col], buttons[row][col]);
+            colorButton(theBoard.Squares[row][col], buttons[row][col]);
          }
       }
    }
@@ -76,7 +76,7 @@ public class CheckersActivity extends Activity implements OnClickListener
    {
       // Test for valid moves. Prints the valid moves into logcat when button is clicked.
       Square temp = (Square) arg0.getTag();
-      
+
       if (temp.isPlayable())
       {
          System.out.println("Valid Moves for Square #" + temp.getPosition() + ":");
@@ -89,51 +89,51 @@ public class CheckersActivity extends Activity implements OnClickListener
          // highlight the clicked square
          selectedButton = null;
          drawBoard();
-         selectedButton = (Button)findViewById(arg0.getId());
+         selectedButton = (Button) findViewById(arg0.getId());
          colorButton(temp, selectedButton);
       }
    }
-   
+
    private void colorButton(Square square, Button button)
    {
-	   if (square.getSquareContents() == SquareContents.LightMan)
-       {
-		   button.setText(R.string.light);
-		   button.setBackgroundColor(Color.LTGRAY);
-		   button.setTextColor(Color.BLACK);
-       }
-       else if (square.getSquareContents() == SquareContents.DarkMan)
-       {
-    	   button.setText(R.string.dark);
-    	   button.setBackgroundColor(Color.DKGRAY);
-    	   button.setTextColor(Color.WHITE);
-       }
-       else if (square.getSquareContents() == SquareContents.LightKing)
-       {
-    	   button.setText(R.string.light_king);
-    	   button.setBackgroundColor(Color.LTGRAY);
-    	   button.setTextColor(Color.BLACK);
-       }
-       else if (square.getSquareContents() == SquareContents.DarkKing)
-       {
-    	   button.setText(R.string.dark_king);
-    	   button.setBackgroundColor(Color.DKGRAY);
-    	   button.setTextColor(Color.WHITE);
-       }
-       else if (square.getSquareContents() == SquareContents.Empty && square.isPlayable())
-       {
-    	   button.setText("");
-    	   button.setBackgroundColor(Color.BLUE);
-       }
-       else if (square.getSquareContents() == SquareContents.Empty && !square.isPlayable())
-       {
-    	   button.setText("");
-    	   button.setBackgroundColor(Color.WHITE);
-       }
-	   
-	   if (selectedButton != null && button.getId() == selectedButton.getId() && square.getSquareContents() != SquareContents.Empty)
-	   {
-		   button.setBackgroundColor(Color.GREEN);
-	   }
+      if (square.getSquareContents() == SquareContents.LightMan)
+      {
+         button.setText(R.string.light);
+         button.setBackgroundColor(Color.LTGRAY);
+         button.setTextColor(Color.BLACK);
+      }
+      else if (square.getSquareContents() == SquareContents.DarkMan)
+      {
+         button.setText(R.string.dark);
+         button.setBackgroundColor(Color.DKGRAY);
+         button.setTextColor(Color.WHITE);
+      }
+      else if (square.getSquareContents() == SquareContents.LightKing)
+      {
+         button.setText(R.string.light_king);
+         button.setBackgroundColor(Color.LTGRAY);
+         button.setTextColor(Color.BLACK);
+      }
+      else if (square.getSquareContents() == SquareContents.DarkKing)
+      {
+         button.setText(R.string.dark_king);
+         button.setBackgroundColor(Color.DKGRAY);
+         button.setTextColor(Color.WHITE);
+      }
+      else if (square.getSquareContents() == SquareContents.Empty && square.isPlayable())
+      {
+         button.setText("");
+         button.setBackgroundColor(Color.BLUE);
+      }
+      else if (square.getSquareContents() == SquareContents.Empty && !square.isPlayable())
+      {
+         button.setText("");
+         button.setBackgroundColor(Color.WHITE);
+      }
+
+      if (selectedButton != null && button.getId() == selectedButton.getId() && square.getSquareContents() != SquareContents.Empty)
+      {
+         button.setBackgroundColor(Color.GREEN);
+      }
    }
 }

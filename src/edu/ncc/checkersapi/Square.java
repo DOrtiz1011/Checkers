@@ -132,4 +132,34 @@ public class Square
    {
       this.nextSquares = nextSquares;
    }
+
+   //
+   // --------------------------------------------------------------------------------------------------------------
+
+   private int row = 0;
+   
+   protected void setRow(int row)
+   {
+      this.row = row;
+   }
+   
+   public int getRow()
+   {
+      return this.row;
+   }
+
+   //
+   // --------------------------------------------------------------------------------------------------------------
+
+   private int col = 0;
+   
+   protected void setCol(int col)
+   {
+      this.col = col;
+   }
+   
+   public int getCol()
+   {
+      return this.col;
+   }
 }
