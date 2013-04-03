@@ -87,6 +87,7 @@ public class CheckersActivity extends Activity implements OnClickListener
          }
 
          // highlight the clicked square
+         theBoard.setSelectedSquare(temp);
          selectedButton = null;
          drawBoard();
          selectedButton = (Button) findViewById(arg0.getId());

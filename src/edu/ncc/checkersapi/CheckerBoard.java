@@ -85,6 +85,23 @@ public class CheckerBoard
          playerTurn = PlayerTurn.LightsTurn;
       }
    }
+   
+   // --------------------------------------------------------------------------------------------------------------
+   
+   private Square selectedSquare = null;
+   
+   public void setSelectedSquare(Square square)
+   {
+      if (square.isPlayable())
+      {
+         selectedSquare = square;
+      }
+   }
+   
+   public Square getSelectedSquare()
+   {
+      return selectedSquare;
+   }
 
    private boolean   jumpAvailable = false; // Is there a jump available?
 
@@ -150,8 +167,7 @@ public class CheckerBoard
       {
          square.setSquareContents(SquareContents.LightMan);
       }
-      else
-      // Leaves the middle 2 rows empty
+      else // Leaves the middle 2 rows empty
       {
          square.setSquareContents(SquareContents.Empty);
       }
