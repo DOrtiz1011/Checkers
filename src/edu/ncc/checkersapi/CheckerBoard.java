@@ -6,7 +6,7 @@ import edu.ncc.checkersapi.Square.*;
 
 public class CheckerBoard
 {
-   private int numLightMen;   // Number of Light Pieces
+   private int numLightMen = 12;   // Number of Light Pieces
 
    public int getNumLightMen()
    {
@@ -20,7 +20,7 @@ public class CheckerBoard
 
    // --------------------------------------------------------------------------------------------------------------
 
-   private int numLightKings;   // Number of Light Kings
+   private int numLightKings = 0;   // Number of Light Kings
 
    public int getNumLightKings()
    {
@@ -34,7 +34,7 @@ public class CheckerBoard
 
    // --------------------------------------------------------------------------------------------------------------
 
-   private int numDarkMen;    // Number of Dark Pieces
+   private int numDarkMen = 12;    // Number of Dark Pieces
 
    public int getNumDarkMen()
    {
@@ -48,7 +48,7 @@ public class CheckerBoard
 
    // --------------------------------------------------------------------------------------------------------------
 
-   private int numDarkKings;   // Number of Dark Kings
+   private int numDarkKings = 0;   // Number of Dark Kings
 
    public int getNumDarkKings()
    {
@@ -67,7 +67,7 @@ public class CheckerBoard
       LightsTurn, DarksTurn
    }
 
-   private PlayerTurn playerTurn;
+   private PlayerTurn playerTurn = PlayerTurn.DarksTurn;
 
    public PlayerTurn getPlayerTurn()
    {
@@ -98,12 +98,7 @@ public class CheckerBoard
    {
       int positionIndex = 1;
 
-      numLightMen = 12;
-      numLightKings = 0;
-      numDarkMen = 12;
-      numDarkKings = 0;
-      playerTurn = PlayerTurn.DarksTurn;   // Dark Player goes first
-      Squares = new Square[8][8];       // This initializes the pointer for the entire board
+      Squares = new Square[8][8];   // This initializes the pointer for the entire board
 
       // Populates the 8x8 board
       for (int row = 0; row < 8; row++)

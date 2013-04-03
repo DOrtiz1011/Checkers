@@ -51,7 +51,7 @@ public class Square
       Empty, LightMan, LightKing, DarkMan, DarkKing
    }
 
-   private SquareContents squareContents;
+   private SquareContents squareContents = SquareContents.Empty;
 
    public SquareContents getSquareContents()
    {
@@ -78,14 +78,14 @@ public class Square
 
    public enum SquareEdgeType
    {
-      NonEdge, TopEdge, BottomEdge, LeftEdge, RightEdge, TopRightCorner, BottomLeftCorner
+      NonEdge, TopEdge, BottomEdge, LeftEdge, RightEdge, TopRightCorner, BottomLeftCorner, NonPlayable
    }
 
-   private SquareEdgeType squareEdgeType;
+   private SquareEdgeType squareEdgeType = SquareEdgeType.NonPlayable;
 
    public SquareEdgeType getSquareEdgeType()
    {
-      SquareEdgeType squareEdgeTypeReturn = SquareEdgeType.NonEdge;
+      SquareEdgeType squareEdgeTypeReturn = SquareEdgeType.NonPlayable;
 
       if (playable)
       {
