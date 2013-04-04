@@ -129,6 +129,9 @@ public class CheckerBoard
             // set the coordinates for the square
             Squares[row][col].setRow(row);
             Squares[row][col].setCol(col);
+            
+            // assigns square number
+            Squares[row][col].setNumber((row*8)+col);
 
             if ((row + col) % 2 != 0)
             {
@@ -321,9 +324,7 @@ public class CheckerBoard
             {
                if (tempMoves[i] != -1)
                {
-                  int[] tempCoord = getCoordinates(tempMoves[i]);    // Coordinates of potential move
-
-                  tempSquare = Squares[tempCoord[0]][tempCoord[1]];
+                  tempSquare = posToSquare(tempMoves[i]);   //Square to potentially move to
 
                   SquareContents contents = tempSquare.getSquareContents();
 
@@ -395,46 +396,28 @@ public class CheckerBoard
    // Checks to see if a jump is possible. Returns the square to jump to if possible, null if not
    private Square checkForJump(Square square, Square tempSquare)
    {
-      int[] squareCoord = getCoordinates(square);
-      int[] targetCoord = getCoordinates(tempSquare);
-
-      int squareNum = coordToNum(squareCoord);
-      int targetNum = coordToNum(targetCoord);
+      int squareNum = square.getNumber();
+      int targetNum = tempSquare.getNumber();
 
       int distance = squareNum - targetNum;
-
-      int[] checkCoord = numToCoord(targetNum - distance);
-      Square checkSquare = Squares[checkCoord[0]][checkCoord[1]];
+      
+      Square checkSquare = numToSquare(targetNum - distance);
       if (checkSquare.getSquareContents() == SquareContents.Empty)
          return checkSquare;
       return null;
    }
 
-   // Converts a square number to coordinates (row and col)
-   private int[] numToCoord(int i)
+   // Returns the square associated to the given number
+   private Square numToSquare(int number)
    {
       int coord[] = {-1, -1};
-      coord[0] = i / 8;
-      coord[1] = i - (coord[0] * 8);
-      return coord;
+      coord[0] = number / 8;
+      coord[1] = number - (coord[0] * 8);
+      return getSquare(coord);
    }
 
-   // Converts coordinates to a square number (helps in figuring out moves)
-   // Square number: Top left corner square is 0, increments sequentially ending with the bottom right square being 63
-   // Unplayable squares have numbers too.
-   private int coordToNum(int[] coordinates)
-   {
-      return (coordinates[0] * 8) + (coordinates[1]);
-   }
-
-   // Gets the coordinates of a square (row and col numbers) of a given square
-   private int[] getCoordinates(Square square)
-   {
-      return getCoordinates(square.getPosition());
-   }
-
-   // Gets the coordinates of a square (row and col) of a square with the given position
-   private int[] getCoordinates(int position)
+   // Returns the square with the given position
+   private Square posToSquare(int position)
    {
       int[] coordinates = {-1, -1};
       coordinates[0] = (position - 1) / 4;   // Finds the row of the next possible square
@@ -448,6 +431,12 @@ public class CheckerBoard
       {
          coordinates[1] = (position - ((coordinates[0] * 4)) - 1) * 2;
       }
-      return coordinates;
+      return getSquare(coordinates);
+   }
+   
+   //Returns the square with the given coordinates
+   private Square getSquare(int[] coordinates)
+   {
+      return Squares[coordinates[0]][coordinates[1]];
    }
 }
