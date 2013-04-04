@@ -3,6 +3,8 @@
 package edu.ncc.checkersapi;
 
 import edu.ncc.checkersapi.Square.*;
+import edu.ncc.checkersapi.MoveLog.*;
+import edu.ncc.checkersapi.Stats.*;
 
 public class CheckerBoard
 {
