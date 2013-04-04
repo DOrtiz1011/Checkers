@@ -163,12 +163,15 @@ public class Square
       return this.col;
    }
 
+   // Square number: Top left corner square is 0, increments sequentially ending with the bottom right square being 63
+   // Unplayable squares have numbers too.
    private int number = 0;
+   
    public int getNumber() {
       return number;
    }
 
-   public void setNumber(int number) {
+   protected void setNumber(int number) {
       this.number = number;
    }
 
