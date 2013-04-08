@@ -128,7 +128,7 @@ public class Square
       return nextSquares;
    }
 
-   public void setNextSquares(Square[] nextSquares)
+   protected void setNextSquares(Square[] nextSquares)
    {
       this.nextSquares = nextSquares;
    }

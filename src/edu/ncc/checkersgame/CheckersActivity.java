@@ -19,8 +19,7 @@ public class CheckersActivity extends Activity implements OnClickListener
 {
    private Button       buttons[][];
    private CheckerBoard theBoard;
-   private Button       selectedButton;
-   private final String CHECKER_BOARD = "checkerBoard";
+   //private final String CHECKER_BOARD = "checkerBoard";
 
    @Override
    protected void onCreate(Bundle savedInstanceState)
@@ -41,6 +40,7 @@ public class CheckersActivity extends Activity implements OnClickListener
       int idIndex = R.id.unplayable_1;
 
       for (int row = 0; row < 8; row++)
+      {
          for (int col = 0; col < 8; col++)
          {
             buttons[row][col] = (Button) findViewById(idIndex);
@@ -50,6 +50,7 @@ public class CheckersActivity extends Activity implements OnClickListener
             buttons[row][col].setTag(theBoard.Squares[row][col]);
             idIndex++;
          }
+      }
    }
 
    // Checks state of the board for pieces and draws them in the appropriate position on the board.
@@ -59,9 +60,11 @@ public class CheckersActivity extends Activity implements OnClickListener
       {
          for (int col = 0; col < 8; col++)
          {
-            colorButton(theBoard.Squares[row][col], buttons[row][col]);
+            colorButton(theBoard.Squares[row][col]);
          }
       }
+
+      colorAvailableMoves();
    }
 
    @Override
@@ -76,66 +79,88 @@ public class CheckersActivity extends Activity implements OnClickListener
    public void onClick(View arg0)
    {
       // Test for valid moves. Prints the valid moves into logcat when button is clicked.
-      Square temp = (Square) arg0.getTag();
+      Square selectedSquare = (Square) arg0.getTag();
 
-      if (temp.isPlayable())
+      if (selectedSquare.isPlayable() && selectedSquare.getSquareContents() != SquareContents.Empty)
       {
-         System.out.println("Valid Moves for Square #" + temp.getPosition() + ":");
+         System.out.println("Valid Moves for Square #" + selectedSquare.getPosition() + ":");
 
          for (int i = 0; i < 4; i++)
          {
-            System.out.println(temp.getValidMoves()[i]);
+            System.out.println(selectedSquare.getValidMoves()[i]);
          }
 
-         // highlight the clicked square
-         theBoard.setSelectedSquare(temp);
-         selectedButton = null;
+         // highlight the clicked square and available moves
+         theBoard.setSelectedSquare(selectedSquare);
          drawBoard();
-         selectedButton = (Button) findViewById(arg0.getId());
-         colorButton(temp, selectedButton);
       }
    }
 
-   private void colorButton(Square square, Button button)
+   private void colorAvailableMoves()
    {
+      Square selectedSquare = theBoard.getSelectedSquare();
+
+      if (selectedSquare != null)
+      {
+         Square[] availableMoves = selectedSquare.getNextSquares();
+
+         for (int i = 0; i < availableMoves.length; i++)
+         {
+            if (availableMoves[i] != null)
+            {
+               int row = availableMoves[i].getRow();
+               int col = availableMoves[i].getCol();
+
+               buttons[row][col].setBackgroundColor(Color.MAGENTA);
+               buttons[row][col].setTextColor(Color.BLACK);
+            }
+         }
+      }
+   }
+
+   private void colorButton(Square square)
+   {
+      int row = square.getRow();
+      int col = square.getCol();
+
       if (square.getSquareContents() == SquareContents.LightMan)
       {
-         button.setText(R.string.light);
-         button.setBackgroundColor(Color.LTGRAY);
-         button.setTextColor(Color.BLACK);
+         buttons[row][col].setText(R.string.light);
+         buttons[row][col].setBackgroundColor(Color.LTGRAY);
+         buttons[row][col].setTextColor(Color.BLACK);
       }
       else if (square.getSquareContents() == SquareContents.DarkMan)
       {
-         button.setText(R.string.dark);
-         button.setBackgroundColor(Color.DKGRAY);
-         button.setTextColor(Color.WHITE);
+         buttons[row][col].setText(R.string.dark);
+         buttons[row][col].setBackgroundColor(Color.DKGRAY);
+         buttons[row][col].setTextColor(Color.WHITE);
       }
       else if (square.getSquareContents() == SquareContents.LightKing)
       {
-         button.setText(R.string.light_king);
-         button.setBackgroundColor(Color.LTGRAY);
-         button.setTextColor(Color.BLACK);
+         buttons[row][col].setText(R.string.light_king);
+         buttons[row][col].setBackgroundColor(Color.LTGRAY);
+         buttons[row][col].setTextColor(Color.BLACK);
       }
       else if (square.getSquareContents() == SquareContents.DarkKing)
       {
-         button.setText(R.string.dark_king);
-         button.setBackgroundColor(Color.DKGRAY);
-         button.setTextColor(Color.WHITE);
+         buttons[row][col].setText(R.string.dark_king);
+         buttons[row][col].setBackgroundColor(Color.DKGRAY);
+         buttons[row][col].setTextColor(Color.WHITE);
       }
       else if (square.getSquareContents() == SquareContents.Empty && square.isPlayable())
       {
-         button.setText("");
-         button.setBackgroundColor(Color.BLUE);
+         buttons[row][col].setText("");
+         buttons[row][col].setBackgroundColor(Color.BLUE);
       }
       else if (square.getSquareContents() == SquareContents.Empty && !square.isPlayable())
       {
-         button.setText("");
-         button.setBackgroundColor(Color.WHITE);
+         buttons[row][col].setText("");
+         buttons[row][col].setBackgroundColor(Color.WHITE);
       }
 
-      if (selectedButton != null && button.getId() == selectedButton.getId() && square.getSquareContents() != SquareContents.Empty)
+      if (square == theBoard.getSelectedSquare() && square.getSquareContents() != SquareContents.Empty)
       {
-         button.setBackgroundColor(Color.GREEN);
+         buttons[row][col].setBackgroundColor(Color.GREEN);
       }
    }
 

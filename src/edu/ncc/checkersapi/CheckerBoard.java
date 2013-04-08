@@ -151,11 +151,18 @@ public class CheckerBoard
       // Squares[4][3].setSquareContents(SquareContents.DarkMan);
       // Squares[3][6].setSquareContents(SquareContents.LightMan);
 
+      findValidMovesForAllSquares();
+   }
+
+   // --------------------------------------------------------------------------------------------------------------
+
+   public void findValidMovesForAllSquares()
+   {
       for (int row = 0; row < 8; row++)
       {
          for (int col = 0; col < 8; col++)
          {
-            findValidMoves(Squares[row][col]);
+            findValidMovesForSquare(Squares[row][col]);
          }
       }
    }
@@ -216,7 +223,7 @@ public class CheckerBoard
 
    // --------------------------------------------------------------------------------------------------------------
    // Finds the valid moves for a given square. Doesn't take jumps into consideration yet.
-   private void findValidMoves(Square square)
+   private void findValidMovesForSquare(Square square)
    {
       int[] tempMoves = {-1, -1, -1, -1};    // Array that holds the position index of up to 4 valid moves. -1 for no move
       Square[] nextSquares = {null, null, null, null};
