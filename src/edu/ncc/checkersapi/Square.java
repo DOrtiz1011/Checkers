@@ -21,7 +21,7 @@ public class Square
    // Each playable square has a position number. This is used for recording moves. Default value is -1
    // --------------------------------------------------------------------------------------------------------------
 
-   private int Position = -1;
+   private int position = -1;
 
    public int getPosition()
    {
@@ -29,7 +29,7 @@ public class Square
 
       if (playable)
       {
-         positionReturn = Position;
+         positionReturn = position;
       }
 
       return positionReturn;
@@ -39,7 +39,7 @@ public class Square
    {
       if (playable)
       {
-         Position = position;
+         this.position = position;
       }
    }
 
@@ -137,12 +137,12 @@ public class Square
    // --------------------------------------------------------------------------------------------------------------
 
    private int row = 0;
-   
+
    protected void setRow(int row)
    {
       this.row = row;
    }
-   
+
    public int getRow()
    {
       return this.row;
@@ -152,12 +152,12 @@ public class Square
    // --------------------------------------------------------------------------------------------------------------
 
    private int col = 0;
-   
+
    protected void setCol(int col)
    {
       this.col = col;
    }
-   
+
    public int getCol()
    {
       return this.col;
@@ -166,14 +166,15 @@ public class Square
    // Square number: Top left corner square is 0, increments sequentially ending with the bottom right square being 63
    // Unplayable squares have numbers too.
    private int number = 0;
-   
-   public int getNumber() {
+
+   public int getNumber()
+   {
       return number;
    }
 
-   protected void setNumber(int number) {
+   protected void setNumber(int number)
+   {
       this.number = number;
    }
 
-   
 }

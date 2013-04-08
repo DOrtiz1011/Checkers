@@ -20,6 +20,7 @@ public class CheckersActivity extends Activity implements OnClickListener
    private Button       buttons[][];
    private CheckerBoard theBoard;
    private Button       selectedButton;
+   private final String CHECKER_BOARD = "checkerBoard";
 
    @Override
    protected void onCreate(Bundle savedInstanceState)
@@ -136,5 +137,15 @@ public class CheckersActivity extends Activity implements OnClickListener
       {
          button.setBackgroundColor(Color.GREEN);
       }
+   }
+
+   public void onSavedInstanceState(Bundle savedInstanceState)
+   {
+      super.onSaveInstanceState(savedInstanceState);
+   }
+
+   public void onRestoreInstanceState(Bundle savedInstanceState)
+   {
+      super.onRestoreInstanceState(savedInstanceState);
    }
 }

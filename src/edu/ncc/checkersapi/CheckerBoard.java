@@ -3,8 +3,8 @@
 package edu.ncc.checkersapi;
 
 import edu.ncc.checkersapi.Square.*;
-import edu.ncc.checkersapi.MoveLog.*;
-import edu.ncc.checkersapi.Stats.*;
+//import edu.ncc.checkersapi.MoveLog.*;
+//import edu.ncc.checkersapi.Stats.*;
 
 public class CheckerBoard
 {
@@ -87,11 +87,11 @@ public class CheckerBoard
          playerTurn = PlayerTurn.LightsTurn;
       }
    }
-   
+
    // --------------------------------------------------------------------------------------------------------------
-   
+
    private Square selectedSquare = null;
-   
+
    public void setSelectedSquare(Square square)
    {
       if (square.isPlayable())
@@ -99,7 +99,7 @@ public class CheckerBoard
          selectedSquare = square;
       }
    }
-   
+
    public Square getSelectedSquare()
    {
       return selectedSquare;
@@ -125,13 +125,13 @@ public class CheckerBoard
          for (int col = 0; col < 8; col++)
          {
             Squares[row][col] = new Square();   // Each individual square needs to be initialized.
-            
+
             // set the coordinates for the square
             Squares[row][col].setRow(row);
             Squares[row][col].setCol(col);
-            
+
             // assigns square number
-            Squares[row][col].setNumber((row*8)+col);
+            Squares[row][col].setNumber((row * 8) + col);
 
             if ((row + col) % 2 != 0)
             {
@@ -148,8 +148,8 @@ public class CheckerBoard
       }
 
       // Temporarily Adds Extra Pieces to allow for jump testing.
-      //Squares[4][3].setSquareContents(SquareContents.DarkMan);
-      //Squares[3][6].setSquareContents(SquareContents.LightMan);
+      // Squares[4][3].setSquareContents(SquareContents.DarkMan);
+      // Squares[3][6].setSquareContents(SquareContents.LightMan);
 
       for (int row = 0; row < 8; row++)
       {
@@ -172,7 +172,8 @@ public class CheckerBoard
       {
          square.setSquareContents(SquareContents.LightMan);
       }
-      else // Leaves the middle 2 rows empty
+      else
+      // Leaves the middle 2 rows empty
       {
          square.setSquareContents(SquareContents.Empty);
       }
@@ -324,7 +325,7 @@ public class CheckerBoard
             {
                if (tempMoves[i] != -1)
                {
-                  tempSquare = posToSquare(tempMoves[i]);   //Square to potentially move to
+                  tempSquare = posToSquare(tempMoves[i]);   // Square to potentially move to
 
                   SquareContents contents = tempSquare.getSquareContents();
 
@@ -400,7 +401,7 @@ public class CheckerBoard
       int targetNum = tempSquare.getNumber();
 
       int distance = squareNum - targetNum;
-      
+
       Square checkSquare = numToSquare(targetNum - distance);
       if (checkSquare.getSquareContents() == SquareContents.Empty)
          return checkSquare;
@@ -433,8 +434,8 @@ public class CheckerBoard
       }
       return getSquare(coordinates);
    }
-   
-   //Returns the square with the given coordinates
+
+   // Returns the square with the given coordinates
    private Square getSquare(int[] coordinates)
    {
       return Squares[coordinates[0]][coordinates[1]];
