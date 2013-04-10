@@ -8,7 +8,31 @@ import edu.ncc.checkersapi.Square.*;
 
 public class CheckerBoard
 {
-   private int numLightMen = 12;   // Number of Light Pieces
+   private int numLightMen      = 12; // Number of Light Pieces
+   private int numLightKings    = 0; // Number of Light Kings
+   private int numLightCaptured = 0; // Number of Captured Light Pieces
+   private int numDarkMen       = 12; // Number of Dark Pieces
+   private int numDarkKings     = 0; // Number of Dark Kings
+   private int numDarkCaptured  = 0; // Number of Captured Dark Pieces
+
+   // --------------------------------------------------------------------------------------------------------------
+
+   private void sanityCheck()
+   {
+      // needs to throw an exception
+
+      if (numLightMen + numLightKings + numLightCaptured != 12)
+      {
+         System.out.println("SANITY CHECK FAILED FOR LIGHT PIECES!!");
+      }
+
+      if (numDarkMen + numDarkKings + numDarkCaptured != 12)
+      {
+         System.out.println("SANITY CHECK FAILED FOR DARK PIECES!!");
+      }
+   }
+
+   // --------------------------------------------------------------------------------------------------------------
 
    public int getNumLightMen()
    {
@@ -18,11 +42,10 @@ public class CheckerBoard
    public void setNumLightMen(int numLightMen)
    {
       this.numLightMen = numLightMen;
+      sanityCheck();
    }
 
    // --------------------------------------------------------------------------------------------------------------
-
-   private int numLightKings = 0;   // Number of Light Kings
 
    public int getNumLightKings()
    {
@@ -32,11 +55,10 @@ public class CheckerBoard
    public void setNumLightKings(int numLightKings)
    {
       this.numLightKings = numLightKings;
+      sanityCheck();
    }
 
    // --------------------------------------------------------------------------------------------------------------
-
-   private int numDarkMen = 12;    // Number of Dark Pieces
 
    public int getNumDarkMen()
    {
@@ -46,11 +68,10 @@ public class CheckerBoard
    public void setNumDarkMen(int numDarkMen)
    {
       this.numDarkMen = numDarkMen;
+      sanityCheck();
    }
 
    // --------------------------------------------------------------------------------------------------------------
-
-   private int numDarkKings = 0;   // Number of Dark Kings
 
    public int getNumDarkKings()
    {
@@ -60,6 +81,7 @@ public class CheckerBoard
    public void setNumDarkKings(int numDarkKings)
    {
       this.numDarkKings = numDarkKings;
+      sanityCheck();
    }
 
    // --------------------------------------------------------------------------------------------------------------
@@ -96,7 +118,14 @@ public class CheckerBoard
    {
       if (square.isPlayable())
       {
-         selectedSquare = square;
+         if (playerTurn == PlayerTurn.DarksTurn && (square.getSquareContents() == SquareContents.DarkMan || square.getSquareContents() == SquareContents.DarkKing))
+         {
+            selectedSquare = square;
+         }
+         else if (playerTurn == PlayerTurn.LightsTurn && (square.getSquareContents() == SquareContents.LightMan || square.getSquareContents() == SquareContents.LightKing))
+         {
+            selectedSquare = square;
+         }
       }
    }
 
