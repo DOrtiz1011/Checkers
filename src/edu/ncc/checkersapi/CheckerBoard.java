@@ -257,8 +257,9 @@ public class CheckerBoard
       int direction = 0;         // Direction the pieces are moving. 1 for going down, -1 for going up.
       int offset = 0;         // Number of position indexes away the valid move is. Will either be 3 or 5, depending on the row.
       boolean isKing = false;     // Is the piece in this square a king?
-
       Square tempSquare;
+      
+      square.setJumpAvailable(false);   // when sweeping the board to determine moves assume no jump is available until its found
 
       if (square.isPlayable())
       {
