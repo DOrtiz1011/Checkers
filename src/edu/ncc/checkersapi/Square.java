@@ -106,31 +106,51 @@ public class Square
    //
    // --------------------------------------------------------------------------------------------------------------
 
-   private int[] validMoves = {-1, -1, -1, -1};    // Array that holds position indexes of valid moves. -1 for no valid moves.
-
-   public int[] getValidMoves()
+   public void printValidMoves()
    {
-      return validMoves;
-   }
+      // Prints the valid moves into logcat when button is clicked.
+      if (isPlayable() && getSquareContents() != SquareContents.Empty)
+      {
+         String validMoves = "Valid Moves for Square #" + getPosition() + ": ";
+         boolean movesFound = false;
+         Square[] nextSquares = getValidMoves();
 
-   public void setValidMoves(int[] validMoves)
-   {
-      this.validMoves = validMoves;
+         if (jumpAvailable)
+         {
+            validMoves = validMoves + "Jump Available - ";
+         }
+
+         for (int i = 0; i < nextSquares.length; i++)
+         {
+            if (nextSquares[i] != null)
+            {
+               movesFound = true;
+               validMoves = validMoves + nextSquares[i].getPosition() + " ";
+            }
+         }
+
+         if (!movesFound)
+         {
+            validMoves = validMoves + "no moves available";
+         }
+
+         System.out.println(validMoves);
+      }
    }
 
    //
    // --------------------------------------------------------------------------------------------------------------
 
-   private Square[] nextSquares = {null, null, null, null}; // Array that holds the actual squares that can be moved into.
+   private Square[] validMoves = {null, null, null, null}; // Array that holds the actual squares that can be moved into.
 
-   public Square[] getNextSquares()
+   public Square[] getValidMoves()
    {
-      return nextSquares;
+      return validMoves;
    }
 
-   protected void setNextSquares(Square[] nextSquares)
+   protected void setValidMoves(Square[] validMoves)
    {
-      this.nextSquares = nextSquares;
+      this.validMoves = validMoves;
    }
 
    //
@@ -165,6 +185,8 @@ public class Square
 
    // Square number: Top left corner square is 0, increments sequentially ending with the bottom right square being 63
    // Unplayable squares have numbers too.
+   // --------------------------------------------------------------------------------------------------------------
+
    private int number = 0;
 
    public int getNumber()
@@ -175,6 +197,30 @@ public class Square
    protected void setNumber(int number)
    {
       this.number = number;
+   }
+
+   // --------------------------------------------------------------------------------------------------------------
+
+   private boolean jumpAvailable = false; // Is there a jump available?
+
+   public boolean isJumpAvailable()
+   {
+      boolean jumpAvailableReturn = false;
+
+      if (playable)
+      {
+         jumpAvailableReturn = jumpAvailable;
+      }
+
+      return jumpAvailableReturn;
+   }
+
+   protected void setJumpAvailable(boolean jumpAvailable)
+   {
+      if (playable)
+      {
+         this.jumpAvailable = jumpAvailable;
+      }
    }
 
 }

@@ -134,8 +134,6 @@ public class CheckerBoard
       return selectedSquare;
    }
 
-   private boolean   jumpAvailable = false; // Is there a jump available?
-
    public Square[][] Squares;
 
    // Setup the board for a new game
@@ -384,7 +382,7 @@ public class CheckerBoard
                            // If a jump is possible (tempSquare isn't null)
                            if (tempSquare != null)
                            {
-                              jumpAvailable = true;
+                              square.setJumpAvailable(true);
                               tempMoves[i] = tempSquare.getPosition();
                            }
                            else
@@ -403,7 +401,8 @@ public class CheckerBoard
                            tempSquare = checkForJump(square, tempSquare);
                            if (tempSquare != null)
                            {
-                              jumpAvailable = true;
+                              // jumpAvailable = true;
+                              square.setJumpAvailable(true);
                               tempMoves[i] = tempSquare.getPosition();
                            }
                            else
@@ -426,8 +425,7 @@ public class CheckerBoard
          }
       }
 
-      square.setValidMoves(tempMoves);    // Saves the array of valid moves in the square object.
-      square.setNextSquares(nextSquares); // Saves the array of squares in the square object.
+      square.setValidMoves(nextSquares); // Saves the array of squares in the square object.
    }
 
    // Checks to see if a jump is possible. Returns the square to jump to if possible, null if not

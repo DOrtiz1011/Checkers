@@ -19,7 +19,8 @@ public class CheckersActivity extends Activity implements OnClickListener
 {
    private Button       buttons[][];
    private CheckerBoard theBoard;
-   //private final String CHECKER_BOARD = "checkerBoard";
+
+   // private final String CHECKER_BOARD = "checkerBoard";
 
    @Override
    protected void onCreate(Bundle savedInstanceState)
@@ -78,22 +79,13 @@ public class CheckersActivity extends Activity implements OnClickListener
    @Override
    public void onClick(View arg0)
    {
-      // Test for valid moves. Prints the valid moves into logcat when button is clicked.
       Square selectedSquare = (Square) arg0.getTag();
 
-      if (selectedSquare.isPlayable() && selectedSquare.getSquareContents() != SquareContents.Empty)
-      {
-         System.out.println("Valid Moves for Square #" + selectedSquare.getPosition() + ":");
+      selectedSquare.printValidMoves();
 
-         for (int i = 0; i < 4; i++)
-         {
-            System.out.println(selectedSquare.getValidMoves()[i]);
-         }
-
-         // highlight the clicked square and available moves
-         theBoard.setSelectedSquare(selectedSquare);
-         drawBoard();
-      }
+      // highlight the clicked square and available moves
+      theBoard.setSelectedSquare(selectedSquare);
+      drawBoard();
    }
 
    private void colorAvailableMoves()
@@ -102,7 +94,7 @@ public class CheckersActivity extends Activity implements OnClickListener
 
       if (selectedSquare != null)
       {
-         Square[] availableMoves = selectedSquare.getNextSquares();
+         Square[] availableMoves = selectedSquare.getValidMoves();
 
          for (int i = 0; i < availableMoves.length; i++)
          {
