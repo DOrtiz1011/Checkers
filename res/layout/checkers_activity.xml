@@ -6,451 +6,451 @@
 
     <ImageButton
         android:id="@+id/imageButton00"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="40dp" />
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="48dp" />
 
     <ImageButton
         android:id="@+id/ImageButton01"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/imageButton00"
         android:layout_toRightOf="@+id/imageButton00" />
 
     <ImageButton
         android:id="@+id/ImageButton02"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton01"
         android:layout_toRightOf="@+id/ImageButton01" />
 
     <ImageButton
         android:id="@+id/ImageButton03"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton02"
         android:layout_toRightOf="@+id/ImageButton02" />
 
     <ImageButton
         android:id="@+id/ImageButton04"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton03"
         android:layout_toRightOf="@+id/ImageButton03" />
 
     <ImageButton
         android:id="@+id/ImageButton05"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton04"
         android:layout_toRightOf="@+id/ImageButton04" />
 
     <ImageButton
         android:id="@+id/ImageButton06"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton05"
         android:layout_toRightOf="@+id/ImageButton05" />
 
     <ImageButton
         android:id="@+id/ImageButton07"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton06"
         android:layout_toRightOf="@+id/ImageButton06" />
 
     <ImageButton
         android:id="@+id/ImageButton10"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignLeft="@+id/imageButton00"
         android:layout_below="@+id/imageButton00" />
 
     <ImageButton
         android:id="@+id/ImageButton11"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton10"
         android:layout_toRightOf="@id/ImageButton10" />
 
     <ImageButton
         android:id="@+id/ImageButton12"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton11"
         android:layout_toRightOf="@+id/ImageButton11" />
 
     <ImageButton
         android:id="@+id/ImageButton13"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton12"
         android:layout_toRightOf="@+id/ImageButton12" />
 
     <ImageButton
         android:id="@+id/ImageButton14"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton13"
         android:layout_toRightOf="@+id/ImageButton13" />
 
     <ImageButton
         android:id="@+id/ImageButton15"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton14"
         android:layout_toRightOf="@+id/ImageButton14" />
 
     <ImageButton
         android:id="@+id/ImageButton16"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton15"
         android:layout_toRightOf="@+id/ImageButton15" />
 
     <ImageButton
         android:id="@+id/ImageButton17"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton16"
         android:layout_toRightOf="@+id/ImageButton16" />
 
     <ImageButton
         android:id="@+id/ImageButton20"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignLeft="@+id/ImageButton10"
         android:layout_below="@+id/ImageButton10" />
 
     <ImageButton
         android:id="@+id/ImageButton21"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@id/ImageButton20"
         android:layout_toRightOf="@id/ImageButton20" />
 
     <ImageButton
         android:id="@+id/ImageButton22"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@id/ImageButton21"
         android:layout_toRightOf="@id/ImageButton21" />
 
     <ImageButton
         android:id="@+id/ImageButton23"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton22"
         android:layout_toRightOf="@+id/ImageButton22" />
 
     <ImageButton
         android:id="@+id/ImageButton24"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton23"
         android:layout_toRightOf="@+id/ImageButton23" />
 
     <ImageButton
         android:id="@+id/ImageButton25"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton24"
         android:layout_toRightOf="@+id/ImageButton24" />
 
     <ImageButton
         android:id="@+id/ImageButton26"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton25"
         android:layout_toRightOf="@+id/ImageButton25" />
 
     <ImageButton
         android:id="@+id/ImageButton27"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton26"
         android:layout_toRightOf="@+id/ImageButton26" />
 
     <ImageButton
         android:id="@+id/ImageButton30"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignLeft="@+id/ImageButton20"
         android:layout_below="@+id/ImageButton20" />
 
     <ImageButton
         android:id="@+id/ImageButton31"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton30"
         android:layout_toRightOf="@+id/ImageButton30" />
 
     <ImageButton
         android:id="@+id/ImageButton32"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton31"
         android:layout_toRightOf="@+id/ImageButton31" />
 
     <ImageButton
         android:id="@+id/ImageButton33"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton32"
         android:layout_toRightOf="@+id/ImageButton32" />
 
     <ImageButton
         android:id="@+id/ImageButton34"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton33"
         android:layout_toRightOf="@+id/ImageButton33" />
 
     <ImageButton
         android:id="@+id/ImageButton35"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton34"
         android:layout_toRightOf="@+id/ImageButton34" />
 
     <ImageButton
         android:id="@+id/ImageButton36"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton35"
         android:layout_toRightOf="@+id/ImageButton35" />
 
     <ImageButton
         android:id="@+id/ImageButton37"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton36"
         android:layout_toRightOf="@+id/ImageButton36" />
 
     <ImageButton
         android:id="@+id/ImageButton40"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignLeft="@+id/ImageButton30"
         android:layout_below="@+id/ImageButton30" />
 
     <ImageButton
         android:id="@+id/ImageButton41"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton40"
         android:layout_toRightOf="@+id/ImageButton40" />
 
     <ImageButton
         android:id="@+id/ImageButton42"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton41"
         android:layout_toRightOf="@+id/ImageButton41" />
 
     <ImageButton
         android:id="@+id/ImageButton43"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton42"
         android:layout_toRightOf="@+id/ImageButton42" />
 
     <ImageButton
         android:id="@+id/ImageButton44"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton43"
         android:layout_toRightOf="@+id/ImageButton43" />
 
     <ImageButton
         android:id="@+id/ImageButton45"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton44"
         android:layout_toRightOf="@+id/ImageButton44" />
 
     <ImageButton
         android:id="@+id/ImageButton46"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton45"
         android:layout_toRightOf="@+id/ImageButton45" />
 
     <ImageButton
         android:id="@+id/ImageButton47"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton46"
         android:layout_toRightOf="@+id/ImageButton46" />
 
     <ImageButton
         android:id="@+id/ImageButton50"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignLeft="@+id/ImageButton40"
         android:layout_below="@+id/ImageButton40" />
 
     <ImageButton
         android:id="@+id/ImageButton51"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton50"
         android:layout_toRightOf="@+id/ImageButton50" />
 
     <ImageButton
         android:id="@+id/ImageButton52"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton51"
         android:layout_toRightOf="@+id/ImageButton51" />
 
     <ImageButton
         android:id="@+id/ImageButton53"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton52"
         android:layout_toRightOf="@+id/ImageButton52" />
 
     <ImageButton
         android:id="@+id/ImageButton54"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton53"
         android:layout_toRightOf="@+id/ImageButton53" />
 
     <ImageButton
         android:id="@+id/ImageButton55"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton54"
         android:layout_toRightOf="@+id/ImageButton54" />
 
     <ImageButton
         android:id="@+id/ImageButton56"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton55"
         android:layout_toRightOf="@+id/ImageButton55" />
 
     <ImageButton
         android:id="@+id/ImageButton57"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton56"
         android:layout_toRightOf="@+id/ImageButton56" />
 
     <ImageButton
         android:id="@+id/ImageButton60"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignLeft="@+id/ImageButton50"
         android:layout_below="@+id/ImageButton50" />
 
     <ImageButton
         android:id="@+id/ImageButton61"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton60"
         android:layout_toRightOf="@+id/ImageButton60" />
 
     <ImageButton
         android:id="@+id/ImageButton62"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton61"
         android:layout_toRightOf="@+id/ImageButton61" />
 
     <ImageButton
         android:id="@+id/ImageButton63"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton62"
         android:layout_toRightOf="@+id/ImageButton62" />
 
     <ImageButton
         android:id="@+id/ImageButton64"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton63"
         android:layout_toRightOf="@+id/ImageButton63" />
 
     <ImageButton
         android:id="@+id/ImageButton65"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton64"
         android:layout_toRightOf="@+id/ImageButton64" />
 
     <ImageButton
         android:id="@+id/ImageButton66"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton65"
         android:layout_toRightOf="@+id/ImageButton65" />
 
     <ImageButton
         android:id="@+id/ImageButton67"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton66"
         android:layout_toRightOf="@+id/ImageButton66" />
 
     <ImageButton
         android:id="@+id/ImageButton70"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignLeft="@+id/ImageButton60"
         android:layout_below="@+id/ImageButton60" />
 
     <ImageButton
         android:id="@+id/ImageButton71"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton70"
         android:layout_toRightOf="@+id/ImageButton70" />
 
     <ImageButton
         android:id="@+id/ImageButton72"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton71"
         android:layout_toRightOf="@+id/ImageButton71" />
 
     <ImageButton
         android:id="@+id/ImageButton73"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton72"
         android:layout_toRightOf="@+id/ImageButton72" />
 
     <ImageButton
         android:id="@+id/ImageButton74"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton73"
         android:layout_toRightOf="@+id/ImageButton73" />
 
     <ImageButton
         android:id="@+id/ImageButton75"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton74"
         android:layout_toRightOf="@+id/ImageButton74" />
 
     <ImageButton
         android:id="@+id/ImageButton76"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton75"
         android:layout_toRightOf="@+id/ImageButton75" />
 
     <ImageButton
         android:id="@+id/ImageButton77"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignTop="@+id/ImageButton76"
         android:layout_toRightOf="@+id/ImageButton76" />
 

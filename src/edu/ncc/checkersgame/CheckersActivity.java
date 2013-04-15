@@ -15,8 +15,8 @@ import android.widget.ImageButton;
 
 public class CheckersActivity extends Activity implements OnClickListener
 {
-   private ImageButton  buttons[][];
-   private CheckerBoard theBoard;
+   private ImageButton  imageButtons[][];
+   private CheckerBoard checkerBoard;
 
    // private final String CHECKER_BOARD = "checkerBoard";
 
@@ -26,7 +26,7 @@ public class CheckersActivity extends Activity implements OnClickListener
       super.onCreate(savedInstanceState);
       setContentView(R.layout.checkers_activity);
 
-      theBoard = new CheckerBoard();
+      checkerBoard = new CheckerBoard();
 
       createButtons();
       drawBoard();
@@ -35,18 +35,18 @@ public class CheckersActivity extends Activity implements OnClickListener
    // Creates the buttons for the board. Sets the appropriate buttons to be clickable.
    protected void createButtons()
    {
-      buttons = new ImageButton[8][8];
+      imageButtons = new ImageButton[8][8];
       int idIndex = R.id.imageButton00;
 
       for (int row = 0; row < 8; row++)
       {
          for (int col = 0; col < 8; col++)
          {
-            buttons[row][col] = (ImageButton) findViewById(idIndex);
-            buttons[row][col].setOnClickListener(this);
+            imageButtons[row][col] = (ImageButton) findViewById(idIndex);
+            imageButtons[row][col].setOnClickListener(this);
 
             // Stores the correct square object in the button. There may be a better way to do this.
-            buttons[row][col].setTag(theBoard.Squares[row][col]);
+            imageButtons[row][col].setTag(checkerBoard.Squares[row][col]);
             idIndex++;
          }
       }
@@ -59,7 +59,7 @@ public class CheckersActivity extends Activity implements OnClickListener
       {
          for (int col = 0; col < 8; col++)
          {
-            colorButton(theBoard.Squares[row][col]);
+            colorButton(checkerBoard.Squares[row][col]);
          }
       }
 
@@ -82,13 +82,13 @@ public class CheckersActivity extends Activity implements OnClickListener
       selectedSquare.printValidMoves();
 
       // highlight the clicked square and available moves
-      theBoard.setSelectedSquare(selectedSquare);
+      checkerBoard.setSelectedSquare(selectedSquare);
       drawBoard();
    }
 
    private void colorAvailableMoves()
    {
-      Square selectedSquare = theBoard.getSelectedSquare();
+      Square selectedSquare = checkerBoard.getSelectedSquare();
 
       if (selectedSquare != null)
       {
@@ -101,7 +101,7 @@ public class CheckersActivity extends Activity implements OnClickListener
                int row = availableMoves[i].getRow();
                int col = availableMoves[i].getCol();
 
-               buttons[row][col].setBackgroundColor(Color.MAGENTA);
+               imageButtons[row][col].setBackgroundColor(Color.MAGENTA);
             }
          }
       }
@@ -112,34 +112,33 @@ public class CheckersActivity extends Activity implements OnClickListener
       int row = square.getRow();
       int col = square.getCol();
 
-      if (square.getSquareContents() == SquareContents.LightMan)
+      if (square == checkerBoard.getSelectedSquare() && square.getSquareContents() != SquareContents.Empty)
       {
-         buttons[row][col].setBackgroundColor(Color.RED);
+         imageButtons[row][col].setBackgroundColor(Color.GREEN);
+      }
+      else if (square.getSquareContents() == SquareContents.LightMan)
+      {
+         imageButtons[row][col].setBackgroundColor(Color.RED);
       }
       else if (square.getSquareContents() == SquareContents.DarkMan)
       {
-         buttons[row][col].setBackgroundColor(Color.BLACK);
+         imageButtons[row][col].setBackgroundColor(Color.BLACK);
       }
       else if (square.getSquareContents() == SquareContents.LightKing)
       {
-         buttons[row][col].setBackgroundColor(Color.RED);
+         imageButtons[row][col].setBackgroundColor(Color.RED);
       }
       else if (square.getSquareContents() == SquareContents.DarkKing)
       {
-         buttons[row][col].setBackgroundColor(Color.BLACK);
+         imageButtons[row][col].setBackgroundColor(Color.BLACK);
       }
       else if (square.getSquareContents() == SquareContents.Empty && square.isPlayable())
       {
-         buttons[row][col].setBackgroundColor(Color.BLUE);
+         imageButtons[row][col].setBackgroundColor(Color.BLUE);
       }
       else if (square.getSquareContents() == SquareContents.Empty && !square.isPlayable())
       {
-         buttons[row][col].setBackgroundColor(Color.LTGRAY);
-      }
-
-      if (square == theBoard.getSelectedSquare() && square.getSquareContents() != SquareContents.Empty)
-      {
-         buttons[row][col].setBackgroundColor(Color.GREEN);
+         imageButtons[row][col].setBackgroundColor(Color.LTGRAY);
       }
    }
 
