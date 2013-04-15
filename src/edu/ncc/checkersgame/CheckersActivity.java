@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 
 public class CheckersActivity extends Activity implements OnClickListener
 {
-   private ImageButton       buttons[][];
+   private ImageButton  buttons[][];
    private CheckerBoard theBoard;
 
    // private final String CHECKER_BOARD = "checkerBoard";
@@ -36,7 +36,7 @@ public class CheckersActivity extends Activity implements OnClickListener
    protected void createButtons()
    {
       buttons = new ImageButton[8][8];
-      int idIndex = R.id.imageButton1;
+      int idIndex = R.id.imageButton00;
 
       for (int row = 0; row < 8; row++)
       {
@@ -114,19 +114,19 @@ public class CheckersActivity extends Activity implements OnClickListener
 
       if (square.getSquareContents() == SquareContents.LightMan)
       {
-         buttons[row][col].setBackgroundColor(Color.LTGRAY);
+         buttons[row][col].setBackgroundColor(Color.RED);
       }
       else if (square.getSquareContents() == SquareContents.DarkMan)
       {
-         buttons[row][col].setBackgroundColor(Color.DKGRAY);
+         buttons[row][col].setBackgroundColor(Color.BLACK);
       }
       else if (square.getSquareContents() == SquareContents.LightKing)
       {
-         buttons[row][col].setBackgroundColor(Color.LTGRAY);
+         buttons[row][col].setBackgroundColor(Color.RED);
       }
       else if (square.getSquareContents() == SquareContents.DarkKing)
       {
-         buttons[row][col].setBackgroundColor(Color.DKGRAY);
+         buttons[row][col].setBackgroundColor(Color.BLACK);
       }
       else if (square.getSquareContents() == SquareContents.Empty && square.isPlayable())
       {
@@ -134,7 +134,7 @@ public class CheckersActivity extends Activity implements OnClickListener
       }
       else if (square.getSquareContents() == SquareContents.Empty && !square.isPlayable())
       {
-         buttons[row][col].setBackgroundColor(Color.WHITE);
+         buttons[row][col].setBackgroundColor(Color.LTGRAY);
       }
 
       if (square == theBoard.getSelectedSquare() && square.getSquareContents() != SquareContents.Empty)

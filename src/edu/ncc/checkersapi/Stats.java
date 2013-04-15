@@ -40,7 +40,7 @@ public class Stats
    protected void jump(int jumps, int player)
    {
       captures += jumps;
-      
+
       if (player == 0)
       {
          darkCaptured += jumps;
@@ -49,7 +49,7 @@ public class Stats
       {
          lightCaptured += jumps;
       }
-      
+
       if (jumps == 1)
          jump++;
       if (jumps == 2)
