@@ -8,10 +8,10 @@ import edu.ncc.checkersapi.Square.*;
 
 public class CheckerBoard
 {
-   private int numLightMen      = 12; // Number of Light Pieces
+   private int numLightMen      = 0; // Number of Light Pieces
    private int numLightKings    = 0; // Number of Light Kings
    private int numLightCaptured = 0; // Number of Captured Light Pieces
-   private int numDarkMen       = 12; // Number of Dark Pieces
+   private int numDarkMen       = 0; // Number of Dark Pieces
    private int numDarkKings     = 0; // Number of Dark Kings
    private int numDarkCaptured  = 0; // Number of Captured Dark Pieces
 
@@ -21,15 +21,45 @@ public class CheckerBoard
    {
       // needs to throw an exception
 
-      if (numLightMen + numLightKings + numLightCaptured != 12)
+      if ((numLightMen + numLightKings + numLightCaptured) != 12)
       {
          System.out.println("SANITY CHECK FAILED FOR LIGHT PIECES!!");
       }
 
-      if (numDarkMen + numDarkKings + numDarkCaptured != 12)
+      if ((numDarkMen + numDarkKings + numDarkCaptured) != 12)
       {
          System.out.println("SANITY CHECK FAILED FOR DARK PIECES!!");
       }
+   }
+
+   // --------------------------------------------------------------------------------------------------------------
+
+   public int getNumLightCaptured()
+   {
+      return numLightCaptured;
+   }
+
+   // --------------------------------------------------------------------------------------------------------------
+
+   public void incrementNumLightCaptured()
+   {
+      numLightCaptured++;
+      sanityCheck();
+   }
+
+   // --------------------------------------------------------------------------------------------------------------
+
+   public int getNumDarkCaptured()
+   {
+      return numDarkCaptured;
+   }
+
+   // --------------------------------------------------------------------------------------------------------------
+
+   public void incrementNumDarkCaptured()
+   {
+      numDarkCaptured++;
+      sanityCheck();
    }
 
    // --------------------------------------------------------------------------------------------------------------
@@ -181,17 +211,45 @@ public class CheckerBoard
       findValidMovesForAllSquares();
    }
 
+   private void countPieces(Square square)
+   {
+      if (square.getSquareContents() == SquareContents.LightMan)
+      {
+         numLightMen++;
+      }
+      else if (square.getSquareContents() == SquareContents.LightKing)
+      {
+         numLightKings++;
+      }
+      else if (square.getSquareContents() == SquareContents.DarkMan)
+      {
+         numDarkMen++;
+      }
+      else if (square.getSquareContents() == SquareContents.DarkKing)
+      {
+         numDarkKings++;
+      }
+   }
+
    // --------------------------------------------------------------------------------------------------------------
 
    public void findValidMovesForAllSquares()
    {
+      numLightMen = 0;
+      numLightKings = 0;
+      numDarkMen = 0;
+      numDarkKings = 0;
+
       for (int row = 0; row < 8; row++)
       {
          for (int col = 0; col < 8; col++)
          {
             findValidMovesForSquare(Squares[row][col]);
+            countPieces(Squares[row][col]);
          }
       }
+
+      sanityCheck();
    }
 
    // --------------------------------------------------------------------------------------------------------------
