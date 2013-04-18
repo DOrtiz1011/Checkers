@@ -2,6 +2,7 @@
 
 package edu.ncc.checkersapi;
 
+import edu.ncc.checkersapi.Square.SquareContents;
 import edu.ncc.checkersapi.Square.*;
 //import edu.ncc.checkersapi.MoveLog.*;
 //import edu.ncc.checkersapi.Stats.*;
@@ -146,16 +147,23 @@ public class CheckerBoard
 
    public void setSelectedSquare(Square square)
    {
-      if (square.isPlayable())
+      if (square != null)
       {
-         if (playerTurn == PlayerTurn.DarksTurn && (square.getSquareContents() == SquareContents.DarkMan || square.getSquareContents() == SquareContents.DarkKing))
+         if (square.isPlayable())
          {
-            selectedSquare = square;
+            if (playerTurn == PlayerTurn.DarksTurn && (square.getSquareContents() == SquareContents.DarkMan || square.getSquareContents() == SquareContents.DarkKing))
+            {
+               selectedSquare = square;
+            }
+            else if (playerTurn == PlayerTurn.LightsTurn && (square.getSquareContents() == SquareContents.LightMan || square.getSquareContents() == SquareContents.LightKing))
+            {
+               selectedSquare = square;
+            }
          }
-         else if (playerTurn == PlayerTurn.LightsTurn && (square.getSquareContents() == SquareContents.LightMan || square.getSquareContents() == SquareContents.LightKing))
-         {
-            selectedSquare = square;
-         }
+      }
+      else
+      {
+         selectedSquare = null;
       }
    }
 
@@ -532,5 +540,14 @@ public class CheckerBoard
    private Square getSquare(int[] coordinates)
    {
       return Squares[coordinates[0]][coordinates[1]];
+   }
+
+   public void movePiece(Square sqFrom, Square sqTo) {
+      SquareContents temp = sqFrom.getSquareContents();
+      sqTo.setSquareContents(temp);
+      sqFrom.setSquareContents(SquareContents.Empty);
+      setSelectedSquare(null);
+      switchPlayerTurn();
+      findValidMovesForAllSquares();
    }
 }

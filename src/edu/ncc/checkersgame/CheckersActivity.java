@@ -81,9 +81,26 @@ public class CheckersActivity extends Activity implements OnClickListener
 
       selectedSquare.printValidMoves();
 
-      // highlight the clicked square and available moves
-      checkerBoard.setSelectedSquare(selectedSquare);
-      drawBoard();
+      if (!checkerBoard.equals(null)){
+         // highlight the clicked square and available moves
+         if (checkerBoard.getSelectedSquare() == null)
+         {
+            checkerBoard.setSelectedSquare(selectedSquare);
+         }
+         else
+         {
+            Square temp = checkerBoard.getSelectedSquare();
+            for (int i = 0; i < 4; i++){
+               if(selectedSquare.equals(temp.getValidMoves()[i]))
+               {
+                  checkerBoard.movePiece(temp,selectedSquare);
+                  drawBoard();
+                  break;
+               }
+            }
+         }
+         drawBoard();
+      }
    }
 
    private void colorAvailableMoves()
