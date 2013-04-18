@@ -118,19 +118,21 @@ public class CheckersActivity extends Activity implements OnClickListener
       }
       else if (square.getSquareContents() == SquareContents.LightMan)
       {
-         imageButtons[row][col].setBackgroundColor(Color.RED);
+         imageButtons[row][col].setBackgroundColor(Color.BLUE);
+         imageButtons[row][col].setImageResource(R.drawable.light_man);
       }
       else if (square.getSquareContents() == SquareContents.DarkMan)
       {
-         imageButtons[row][col].setBackgroundColor(Color.BLACK);
+         imageButtons[row][col].setBackgroundColor(Color.BLUE);
+         imageButtons[row][col].setImageResource(R.drawable.dark_man);
       }
       else if (square.getSquareContents() == SquareContents.LightKing)
       {
-         imageButtons[row][col].setBackgroundColor(Color.RED);
+         imageButtons[row][col].setBackgroundColor(Color.BLUE);
       }
       else if (square.getSquareContents() == SquareContents.DarkKing)
       {
-         imageButtons[row][col].setBackgroundColor(Color.BLACK);
+         imageButtons[row][col].setBackgroundColor(Color.BLUE);
       }
       else if (square.getSquareContents() == SquareContents.Empty && square.isPlayable())
       {
