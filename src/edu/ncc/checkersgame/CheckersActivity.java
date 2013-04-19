@@ -81,7 +81,8 @@ public class CheckersActivity extends Activity implements OnClickListener
 
       selectedSquare.printValidMoves();
 
-      if (!checkerBoard.equals(null)){
+      if (!checkerBoard.equals(null))
+      {
          // highlight the clicked square and available moves
          if (checkerBoard.getSelectedSquare() == null)
          {
@@ -90,10 +91,11 @@ public class CheckersActivity extends Activity implements OnClickListener
          else
          {
             Square temp = checkerBoard.getSelectedSquare();
-            for (int i = 0; i < 4; i++){
-               if(selectedSquare.equals(temp.getValidMoves()[i]))
+            for (int i = 0; i < 4; i++)
+            {
+               if (selectedSquare.equals(temp.getValidMoves()[i]))
                {
-                  checkerBoard.movePiece(temp,selectedSquare);
+                  checkerBoard.movePiece(temp, selectedSquare);
                   drawBoard();
                   break;
                }
@@ -154,10 +156,12 @@ public class CheckersActivity extends Activity implements OnClickListener
       else if (square.getSquareContents() == SquareContents.Empty && square.isPlayable())
       {
          imageButtons[row][col].setBackgroundColor(Color.BLUE);
+         imageButtons[row][col].setImageResource(0);
       }
       else if (square.getSquareContents() == SquareContents.Empty && !square.isPlayable())
       {
          imageButtons[row][col].setBackgroundColor(Color.LTGRAY);
+         imageButtons[row][col].setImageResource(0);
       }
    }
 

@@ -542,7 +542,8 @@ public class CheckerBoard
       return Squares[coordinates[0]][coordinates[1]];
    }
 
-   public void movePiece(Square sqFrom, Square sqTo) {
+   public void movePiece(Square sqFrom, Square sqTo)
+   {
       SquareContents temp = sqFrom.getSquareContents();
       sqTo.setSquareContents(temp);
       sqFrom.setSquareContents(SquareContents.Empty);
