@@ -351,7 +351,7 @@ public class CheckerBoard
             {
                case NonEdge:
                   // Calculates the row number. If the square is in an even numbered row the offset will be 5
-                  if (((square.getPosition() - 1) / 4) % 2 == 0)
+                  if (square.getRow() % 2 == 0)
                   {
                      if (direction == 1)
                         offset = 5;
@@ -498,6 +498,9 @@ public class CheckerBoard
    // Checks to see if a jump is possible. Returns the square to jump to if possible, null if not
    private Square checkForJump(Square square, Square tempSquare)
    {
+      if (tempSquare.getSquareEdgeType() == SquareEdgeType.TopEdge || tempSquare.getSquareEdgeType() == SquareEdgeType.BottomEdge)
+         return null;
+      
       int squareNum = square.getNumber();
       int targetNum = tempSquare.getNumber();
 
