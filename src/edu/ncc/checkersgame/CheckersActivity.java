@@ -78,6 +78,7 @@ public class CheckersActivity extends Activity implements OnClickListener
    public void onClick(View arg0)
    {
       Square selectedSquare = (Square) arg0.getTag();
+      boolean pieceMoved = false;
 
       selectedSquare.printValidMoves();
 
@@ -95,10 +96,17 @@ public class CheckersActivity extends Activity implements OnClickListener
             {
                if (selectedSquare.equals(temp.getValidMoves()[i]))
                {
-                  checkerBoard.movePiece(temp, selectedSquare);
-                  drawBoard();
+                  pieceMoved = true;
                   break;
                }
+            }
+            if (pieceMoved)
+            {
+               checkerBoard.movePiece(temp,selectedSquare);
+            }
+            else
+            {
+               checkerBoard.setSelectedSquare(selectedSquare);
             }
          }
          drawBoard();
