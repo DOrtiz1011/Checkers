@@ -2,19 +2,20 @@
 
 package edu.ncc.checkersapi;
 
-import edu.ncc.checkersapi.Square.SquareContents;
-import edu.ncc.checkersapi.Square.*;
-//import edu.ncc.checkersapi.MoveLog.*;
-//import edu.ncc.checkersapi.Stats.*;
+import java.io.Serializable;
 
-public class CheckerBoard
+import edu.ncc.checkersapi.Square.SquareContents;
+import edu.ncc.checkersapi.Square.SquareEdgeType;
+
+public class CheckerBoard implements Serializable
 {
-   private int numLightMen      = 0; // Number of Light Pieces
-   private int numLightKings    = 0; // Number of Light Kings
-   private int numLightCaptured = 0; // Number of Captured Light Pieces
-   private int numDarkMen       = 0; // Number of Dark Pieces
-   private int numDarkKings     = 0; // Number of Dark Kings
-   private int numDarkCaptured  = 0; // Number of Captured Dark Pieces
+   private static final long serialVersionUID = 1L;
+   private int               numLightMen      = 0; // Number of Light Pieces
+   private int               numLightKings    = 0; // Number of Light Kings
+   private int               numLightCaptured = 0; // Number of Captured Light Pieces
+   private int               numDarkMen       = 0; // Number of Dark Pieces
+   private int               numDarkKings     = 0; // Number of Dark Kings
+   private int               numDarkCaptured  = 0; // Number of Captured Dark Pieces
 
    // --------------------------------------------------------------------------------------------------------------
 
@@ -500,7 +501,7 @@ public class CheckerBoard
    {
       if (tempSquare.getSquareEdgeType() == SquareEdgeType.TopEdge || tempSquare.getSquareEdgeType() == SquareEdgeType.BottomEdge)
          return null;
-      
+
       int squareNum = square.getNumber();
       int targetNum = tempSquare.getNumber();
 

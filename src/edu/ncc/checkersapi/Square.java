@@ -1,12 +1,16 @@
 
 package edu.ncc.checkersapi;
 
-public class Square
+import java.io.Serializable;
+
+public class Square implements Serializable
 {
+   private static final long serialVersionUID = 1L;
+
    // Is the square playable? Half the squares on the checker board are not playable.
    // --------------------------------------------------------------------------------------------------------------
 
-   private boolean playable = false; // default this to false until the board is initialized
+   private boolean           playable         = false; // default this to false until the board is initialized
 
    public boolean isPlayable()
    {

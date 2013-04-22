@@ -1,24 +1,29 @@
 
 package edu.ncc.checkersgame;
 
-import edu.ncc.checkersapi.CheckerBoard;
-import edu.ncc.checkersapi.Square;
-import edu.ncc.checkersapi.Square.SquareContents;
-import edu.ncc.checkersgame.R;
-import android.os.Bundle;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import edu.ncc.checkersapi.CheckerBoard;
+import edu.ncc.checkersapi.Square;
+import edu.ncc.checkersapi.Square.SquareContents;
 
 public class CheckersActivity extends Activity implements OnClickListener
 {
-   private ImageButton  imageButtons[][];
-   private CheckerBoard checkerBoard;
-
-   // private final String CHECKER_BOARD = "checkerBoard";
+   private ImageButton  imageButtons[][] = null;
+   private CheckerBoard checkerBoard     = null;
+   private final String CHECKER_BOARD    = "checkerBoard";
 
    @Override
    protected void onCreate(Bundle savedInstanceState)
@@ -26,7 +31,15 @@ public class CheckersActivity extends Activity implements OnClickListener
       super.onCreate(savedInstanceState);
       setContentView(R.layout.checkers_activity);
 
-      checkerBoard = new CheckerBoard();
+      if (savedInstanceState == null)
+      {
+         checkerBoard = new CheckerBoard();
+      }
+      else
+      {
+         byte[] byteArray = savedInstanceState.getByteArray(CHECKER_BOARD);
+         checkerBoard = deserialize(byteArray);
+      }
 
       createButtons();
       drawBoard();
@@ -102,7 +115,7 @@ public class CheckersActivity extends Activity implements OnClickListener
             }
             if (pieceMoved)
             {
-               checkerBoard.movePiece(temp,selectedSquare);
+               checkerBoard.movePiece(temp, selectedSquare);
             }
             else
             {
@@ -173,13 +186,57 @@ public class CheckersActivity extends Activity implements OnClickListener
       }
    }
 
-   public void onSavedInstanceState(Bundle savedInstanceState)
+   public void onSaveInstanceState(Bundle savedInstanceState)
    {
       super.onSaveInstanceState(savedInstanceState);
+      savedInstanceState.putByteArray(CHECKER_BOARD, serialize(checkerBoard));
    }
 
    public void onRestoreInstanceState(Bundle savedInstanceState)
    {
       super.onRestoreInstanceState(savedInstanceState);
+   }
+
+   private static byte[] serialize(Object object)
+   {
+      ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+      try
+      {
+         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+         objectOutputStream.writeObject(object);
+      }
+      catch (IOException e)
+      {
+         e.printStackTrace();
+      }
+
+      return byteArrayOutputStream.toByteArray();
+   }
+
+   public static CheckerBoard deserialize(byte[] byteArray)
+   {
+      ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
+      CheckerBoard restoredCheckerBoard = null;
+
+      try
+      {
+         ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+         restoredCheckerBoard = (CheckerBoard) objectInputStream.readObject();
+      }
+      catch (StreamCorruptedException e)
+      {
+         e.printStackTrace();
+      }
+      catch (IOException e)
+      {
+         e.printStackTrace();
+      }
+      catch (ClassNotFoundException e)
+      {
+         e.printStackTrace();
+      }
+
+      return restoredCheckerBoard;
    }
 }
