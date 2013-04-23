@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import edu.ncc.checkersapi.CheckerBoard;
 import edu.ncc.checkersapi.Square;
 import edu.ncc.checkersapi.Square.SquareContents;
@@ -115,7 +117,8 @@ public class CheckersActivity extends Activity implements OnClickListener
             }
             if (pieceMoved)
             {
-               checkerBoard.movePiece(temp, selectedSquare);
+               String error = checkerBoard.movePiece(temp, selectedSquare);
+               displayToast(error);
             }
             else
             {
@@ -186,12 +189,14 @@ public class CheckersActivity extends Activity implements OnClickListener
       }
    }
 
+   @Override
    public void onSaveInstanceState(Bundle savedInstanceState)
    {
       super.onSaveInstanceState(savedInstanceState);
       savedInstanceState.putByteArray(CHECKER_BOARD, serialize(checkerBoard));
    }
 
+   @Override
    public void onRestoreInstanceState(Bundle savedInstanceState)
    {
       super.onRestoreInstanceState(savedInstanceState);
@@ -238,5 +243,14 @@ public class CheckersActivity extends Activity implements OnClickListener
       }
 
       return restoredCheckerBoard;
+   }
+
+   public void displayToast(String message)
+   {
+      if (message != null && message.length() > 0)
+      {
+         Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
+         toast.show();
+      }
    }
 }

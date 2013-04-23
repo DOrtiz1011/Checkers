@@ -19,19 +19,16 @@ public class CheckerBoard implements Serializable
 
    // --------------------------------------------------------------------------------------------------------------
 
-   private void sanityCheck()
+   protected String sanityCheck()
    {
-      // needs to throw an exception
+      String error = null;
 
-      if ((numLightMen + numLightKings + numLightCaptured) != 12)
+      if ((numLightMen + numLightKings + numLightCaptured) != 12 || (numDarkMen + numDarkKings + numDarkCaptured) != 12)
       {
-         System.out.println("SANITY CHECK FAILED FOR LIGHT PIECES!!");
+         error = "SANITY CHECK FAILED!!" + "\nnumLightMen      = " + numLightMen + "\nnumLightKings    = " + numLightKings + "\nnumLightCaptured = " + numLightCaptured + "\nnumDarkMen       = " + numDarkMen + "\nnumDarkKings     = " + numDarkKings + "\nnumDarkCaptured  = " + numDarkCaptured;
       }
 
-      if ((numDarkMen + numDarkKings + numDarkCaptured) != 12)
-      {
-         System.out.println("SANITY CHECK FAILED FOR DARK PIECES!!");
-      }
+      return error;
    }
 
    // --------------------------------------------------------------------------------------------------------------
@@ -242,7 +239,7 @@ public class CheckerBoard implements Serializable
 
    // --------------------------------------------------------------------------------------------------------------
 
-   public void findValidMovesForAllSquares()
+   public String findValidMovesForAllSquares()
    {
       numLightMen = 0;
       numLightKings = 0;
@@ -258,7 +255,7 @@ public class CheckerBoard implements Serializable
          }
       }
 
-      sanityCheck();
+      return sanityCheck();
    }
 
    // --------------------------------------------------------------------------------------------------------------
@@ -355,16 +352,24 @@ public class CheckerBoard implements Serializable
                   if (square.getRow() % 2 == 0)
                   {
                      if (direction == 1)
+                     {
                         offset = 5;
+                     }
                      else
+                     {
                         offset = 3;
+                     }
                   }
                   else
                   {
                      if (direction == 1)
+                     {
                         offset = 3;  // If the square is in an odd numbered row the offset will be 3
+                     }
                      else
+                     {
                         offset = 5;
+                     }
                   }
 
                   // Multiply by direction (1 or -1) to determine whether to add or subtract the offsets
@@ -454,7 +459,9 @@ public class CheckerBoard implements Serializable
                               tempMoves[i] = tempSquare.getPosition();
                            }
                            else
+                           {
                               tempMoves[i] = -1;
+                           }
                            break;
                      }
                   }
@@ -474,7 +481,9 @@ public class CheckerBoard implements Serializable
                               tempMoves[i] = tempSquare.getPosition();
                            }
                            else
+                           {
                               tempMoves[i] = -1;
+                           }
                            break;
                         // If the potential square contains another light piece, that square isn't a valid move
                         case LightMan:
@@ -500,7 +509,9 @@ public class CheckerBoard implements Serializable
    private Square checkForJump(Square square, Square tempSquare)
    {
       if (tempSquare.getSquareEdgeType() == SquareEdgeType.TopEdge || tempSquare.getSquareEdgeType() == SquareEdgeType.BottomEdge)
+      {
          return null;
+      }
 
       int squareNum = square.getNumber();
       int targetNum = tempSquare.getNumber();
@@ -509,7 +520,9 @@ public class CheckerBoard implements Serializable
 
       Square checkSquare = numToSquare(targetNum - distance);
       if (checkSquare.getSquareContents() == SquareContents.Empty)
+      {
          return checkSquare;
+      }
       return null;
    }
 
@@ -546,13 +559,13 @@ public class CheckerBoard implements Serializable
       return Squares[coordinates[0]][coordinates[1]];
    }
 
-   public void movePiece(Square sqFrom, Square sqTo)
+   public String movePiece(Square sqFrom, Square sqTo)
    {
       SquareContents temp = sqFrom.getSquareContents();
       sqTo.setSquareContents(temp);
       sqFrom.setSquareContents(SquareContents.Empty);
       setSelectedSquare(null);
       switchPlayerTurn();
-      findValidMovesForAllSquares();
+      return findValidMovesForAllSquares();
    }
 }
