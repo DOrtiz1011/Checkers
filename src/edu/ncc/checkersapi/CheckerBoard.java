@@ -316,12 +316,12 @@ public class CheckerBoard implements Serializable
    // Finds the valid moves for a given square. Doesn't take jumps into consideration yet.
    private void findValidMovesForSquare(Square square)
    {
-      int[] tempMoves = {-1, -1, -1, -1};    // Array that holds the position index of up to 4 valid moves. -1 for no move
       Square[] nextSquares = {null, null, null, null};
       int direction = 0;         // Direction the pieces are moving. 1 for going down, -1 for going up.
-      int offset = 0;         // Number of position indexes away the valid move is. Will either be 3 or 5, depending on the row.
       boolean isKing = false;     // Is the piece in this square a king?
       Square tempSquare;
+      int currRow;
+      int currCol;
 
       square.setJumpAvailable(false);   // when sweeping the board to determine moves assume no jump is available until its found
 
@@ -345,94 +345,72 @@ public class CheckerBoard implements Serializable
 
          if (square.getSquareContents() != SquareContents.Empty)
          {
+            currRow = square.getRow();
+            currCol = square.getCol();
             switch (square.getSquareEdgeType())
             {
                case NonEdge:
                   // Calculates the row number. If the square is in an even numbered row the offset will be 5
-                  if (square.getRow() % 2 == 0)
-                  {
-                     if (direction == 1)
-                     {
-                        offset = 5;
-                     }
-                     else
-                     {
-                        offset = 3;
-                     }
-                  }
-                  else
-                  {
-                     if (direction == 1)
-                     {
-                        offset = 3;  // If the square is in an odd numbered row the offset will be 3
-                     }
-                     else
-                     {
-                        offset = 5;
-                     }
-                  }
-
-                  // Multiply by direction (1 or -1) to determine whether to add or subtract the offsets
-                  tempMoves[0] = square.getPosition() + (4 * direction);   // One of the offsets will always be 4 regardless of row number
-                  tempMoves[1] = square.getPosition() + (offset * direction);
+                  nextSquares[0] = Squares[currRow + direction][currCol - 1];
+                  nextSquares[1] = Squares[currRow + direction][currCol + 1];
 
                   if (isKing)
                   {   // If the piece is a King, also find moves in the opposite direction
                      direction *= -1;
 
-                     if (offset == 3)
-                     {
-                        offset = 5;  // When going the other direction, the offset needs to be flipped between 5 and 3
-                     }
-                     else
-                     {
-                        offset = 3;
-                     }
-
-                     tempMoves[2] = square.getPosition() + (4 * direction);
-                     tempMoves[3] = square.getPosition() + (offset * direction);
+                     nextSquares[2] = Squares[currRow + direction][currCol + 1];
+                     nextSquares[3] = Squares[currRow + direction][currCol - 1];
                   }
 
                   break;
 
                // If the square is on an edge, there is a maximum of 2 valid moves.
                case LeftEdge:
-               case RightEdge:
-                  tempMoves[0] = square.getPosition() + (4 * direction);
+                  nextSquares[0] = Squares[currRow + direction][currCol + 1];
 
                   if (isKing)
                   {
-                     tempMoves[1] = square.getPosition() + (4 * direction * -1);
+                     nextSquares[1] = Squares[currRow - direction][currCol + 1];
+                  }
+
+                  break;
+                  
+               case RightEdge:
+                  nextSquares[0] = Squares[currRow + direction][currCol - 1];
+
+                  if (isKing)
+                  {
+                     nextSquares[1] = Squares[currRow - direction][currCol - 1];
                   }
 
                   break;
 
                // Squares in the corners only have one possible move.
                case BottomLeftCorner:
-                  tempMoves[0] = 25;
+                  nextSquares[0] = Squares[6][1];
                   break;
 
                case TopRightCorner:
-                  tempMoves[0] = 8;
+                  nextSquares[0] = Squares[1][6];
                   break;
 
                // Squares on the top or bottom edges only have 2 possible moves.
                case TopEdge:
-                  tempMoves[0] = square.getPosition() + 4;
-                  tempMoves[1] = square.getPosition() + 5;
+                  nextSquares[0] = Squares[1][currCol + 1];
+                  nextSquares[1] = Squares[1][currCol - 1];
                   break;
                case BottomEdge:
-                  tempMoves[0] = square.getPosition() - 4;
-                  tempMoves[1] = square.getPosition() - 5;
+                  nextSquares[0] = Squares[6][currCol + 1];
+                  nextSquares[1] = Squares[6][currCol - 1];
                   break;
             }
 
             // Checks to see if next valid square has a piece in it or not.
             for (int i = 0; i < 4; i++)
             {
-               if (tempMoves[i] != -1)
+               if (nextSquares[i] != null)
                {
-                  tempSquare = posToSquare(tempMoves[i]);   // Square to potentially move to
+                  tempSquare = nextSquares[i];   // Square to potentially move to
 
                   SquareContents contents = tempSquare.getSquareContents();
 
@@ -445,7 +423,7 @@ public class CheckerBoard implements Serializable
                         case DarkMan:
                         case DarkKing:
                            tempSquare = null;
-                           tempMoves[i] = -1;
+                           nextSquares[i] = null;
                            break;
                         // If the potential square contains a light piece, checks to see if a jump is possible
                         case LightMan:
@@ -456,11 +434,11 @@ public class CheckerBoard implements Serializable
                            if (tempSquare != null)
                            {
                               square.setJumpAvailable(true);
-                              tempMoves[i] = tempSquare.getPosition();
+                              nextSquares[i] = tempSquare;
                            }
                            else
                            {
-                              tempMoves[i] = -1;
+                              nextSquares[i] = null;
                            }
                            break;
                      }
@@ -478,18 +456,18 @@ public class CheckerBoard implements Serializable
                            {
                               // jumpAvailable = true;
                               square.setJumpAvailable(true);
-                              tempMoves[i] = tempSquare.getPosition();
+                              nextSquares[i] = tempSquare;
                            }
                            else
                            {
-                              tempMoves[i] = -1;
+                              nextSquares[i] = null;
                            }
                            break;
                         // If the potential square contains another light piece, that square isn't a valid move
                         case LightMan:
                         case LightKing:
                            tempSquare = null;
-                           tempMoves[i] = -1;
+                           nextSquares[i] = null;
                            break;
                      }
 
@@ -533,24 +511,6 @@ public class CheckerBoard implements Serializable
       coord[0] = number / 8;
       coord[1] = number - (coord[0] * 8);
       return getSquare(coord);
-   }
-
-   // Returns the square with the given position
-   private Square posToSquare(int position)
-   {
-      int[] coordinates = {-1, -1};
-      coordinates[0] = (position - 1) / 4;   // Finds the row of the next possible square
-
-      // Finds the column of the next possible square
-      if (coordinates[0] % 2 == 0)
-      {
-         coordinates[1] = (position - (coordinates[0] * 4)) * 2 - 1;
-      }
-      else
-      {
-         coordinates[1] = (position - ((coordinates[0] * 4)) - 1) * 2;
-      }
-      return getSquare(coordinates);
    }
 
    // Returns the square with the given coordinates
