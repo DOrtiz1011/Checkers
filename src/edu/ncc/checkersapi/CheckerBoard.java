@@ -485,38 +485,34 @@ public class CheckerBoard implements Serializable
 
    // Checks to see if a jump is possible. Returns the square to jump to if possible, null if not
    private Square checkForJump(Square square, Square tempSquare)
-   {
-      if (tempSquare.getSquareEdgeType() == SquareEdgeType.TopEdge || tempSquare.getSquareEdgeType() == SquareEdgeType.BottomEdge)
-      {
-         return null;
-      }
+   {      
+      int tempRow = tempSquare.getRow();
+      int tempCol = tempSquare.getCol();
+      int row = square.getRow();
+      int col = square.getCol();
+      
+      int rowDirection = 0;
+      if (tempRow - row > 0) rowDirection = 1;
+      else if (tempRow - row < 0) rowDirection = -1;
+      else rowDirection = 0;
+      
+      int colDirection = 0;
+      if (tempCol - col > 0) colDirection = 1;
+      else if (tempCol - col < 0) colDirection = -1;
+      else colDirection = 0;
 
-      int squareNum = square.getNumber();
-      int targetNum = tempSquare.getNumber();
-
-      int distance = squareNum - targetNum;
-
-      Square checkSquare = numToSquare(targetNum - distance);
+      if (tempRow + rowDirection < 0 || tempRow + rowDirection > 7) rowDirection = 0;
+      if (tempCol + colDirection < 0 || tempCol + colDirection > 7) colDirection = 0;
+      
+      if (rowDirection == 0 || colDirection == 0) return null;
+      
+      Square checkSquare = Squares[tempRow + rowDirection][tempCol + colDirection];
       if (checkSquare.getSquareContents() == SquareContents.Empty)
       {
          return checkSquare;
       }
+      
       return null;
-   }
-
-   // Returns the square associated to the given number
-   private Square numToSquare(int number)
-   {
-      int coord[] = {-1, -1};
-      coord[0] = number / 8;
-      coord[1] = number - (coord[0] * 8);
-      return getSquare(coord);
-   }
-
-   // Returns the square with the given coordinates
-   private Square getSquare(int[] coordinates)
-   {
-      return Squares[coordinates[0]][coordinates[1]];
    }
 
    public String movePiece(Square sqFrom, Square sqTo)
