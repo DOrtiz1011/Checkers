@@ -2,6 +2,7 @@
 package edu.ncc.checkersapi;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Square implements Serializable
 {
@@ -226,5 +227,16 @@ public class Square implements Serializable
          this.jumpAvailable = jumpAvailable;
       }
    }
+
+   private int[] jumpList = null;
+   
+   public int[] getJumpList() {
+      return jumpList;
+   }
+
+   public void setJumpList(int[] jumpList2) {
+      this.jumpList = jumpList2;
+   }
+
 
 }

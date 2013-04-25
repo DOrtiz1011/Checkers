@@ -406,6 +406,7 @@ public class CheckerBoard implements Serializable
             }
 
             // Checks to see if next valid square has a piece in it or not.
+            int[] jumpList = {-1,-1,-1,-1};
             for (int i = 0; i < 4; i++)
             {
                if (nextSquares[i] != null)
@@ -435,6 +436,7 @@ public class CheckerBoard implements Serializable
                            {
                               square.setJumpAvailable(true);
                               nextSquares[i] = tempSquare;
+                              jumpList[i] = tempSquare.getPosition();
                            }
                            else
                            {
@@ -457,6 +459,7 @@ public class CheckerBoard implements Serializable
                               // jumpAvailable = true;
                               square.setJumpAvailable(true);
                               nextSquares[i] = tempSquare;
+                              jumpList[i] = tempSquare.getPosition();
                            }
                            else
                            {
@@ -475,6 +478,7 @@ public class CheckerBoard implements Serializable
 
                   // Adds that square to an array of possible squares
                   nextSquares[i] = tempSquare;
+                  square.setJumpList(jumpList);
                }
             }
          }
@@ -529,6 +533,52 @@ public class CheckerBoard implements Serializable
          if (temp == SquareContents.LightMan) temp = SquareContents.LightKing;
          
          sqTo.setSquareContents(temp);
+      }
+      
+      if (sqFrom.isJumpAvailable())
+      {
+         int[] jumpList = sqFrom.getJumpList();
+         Square deadSquare = null;
+         for (int i = 0; i < jumpList.length; i++){
+            if (sqTo.getPosition() == jumpList[i])
+            {
+               int rowDirection = sqTo.getRow() - sqFrom.getRow();
+               int colDirection = sqTo.getCol() - sqFrom.getCol();
+               
+               if (rowDirection < 0 && colDirection < 0)
+               {
+                  deadSquare = Squares[sqTo.getRow() + 1][sqTo.getCol() + 1];
+               }
+               else if (rowDirection < 0 && colDirection > 0)
+               {
+                  deadSquare = Squares[sqTo.getRow() + 1][sqTo.getCol() - 1];
+               }
+               else if (rowDirection > 0 && colDirection < 0)
+               {
+                  deadSquare = Squares[sqTo.getRow() - 1][sqTo.getCol() + 1];
+               }
+               else if (rowDirection > 0 && colDirection > 0)
+               {
+                  deadSquare = Squares[sqTo.getRow() - 1][sqTo.getCol() - 1];
+               }
+               break;
+            }
+         }
+         if (deadSquare != null)
+         {
+            switch(deadSquare.getSquareContents())
+            {
+               case DarkMan:
+               case DarkKing:
+                  numDarkCaptured++;
+                  break;
+               case LightMan:
+               case LightKing:
+                  numLightCaptured++;
+                  break;
+            }
+            deadSquare.setSquareContents(SquareContents.Empty);
+         }
       }
       
       setSelectedSquare(null);
