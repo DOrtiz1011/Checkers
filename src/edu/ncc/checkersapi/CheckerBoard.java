@@ -317,7 +317,7 @@ public class CheckerBoard implements Serializable
    private void findValidMovesForSquare(Square square)
    {
       Square[] nextSquares = {null, null, null, null};
-      int direction = 0;         // Direction the pieces are moving. 1 for going down, -1 for going up.
+      int direction = 1;         // Direction the pieces are moving. 1 for going down, -1 for going up.
       boolean isKing = false;     // Is the piece in this square a king?
       Square tempSquare;
       int currRow;
@@ -520,6 +520,17 @@ public class CheckerBoard implements Serializable
       SquareContents temp = sqFrom.getSquareContents();
       sqTo.setSquareContents(temp);
       sqFrom.setSquareContents(SquareContents.Empty);
+      
+      if (sqTo.getSquareEdgeType() == SquareEdgeType.BottomEdge || sqTo.getSquareEdgeType() == SquareEdgeType.TopEdge)
+      {
+         temp = sqTo.getSquareContents();
+         
+         if (temp == SquareContents.DarkMan) temp = SquareContents.DarkKing;
+         if (temp == SquareContents.LightMan) temp = SquareContents.LightKing;
+         
+         sqTo.setSquareContents(temp);
+      }
+      
       setSelectedSquare(null);
       switchPlayerTurn();
       return findValidMovesForAllSquares();
