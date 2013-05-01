@@ -664,6 +664,7 @@ public class CheckerBoard implements Serializable
       numDarkCaptured = 0;
       gameState = GameState.InPlay;
       playerTurn = PlayerTurn.DarksTurn;
+      setSelectedSquare(null);
 
       for (int row = 0; row < 8; row++)
       {
