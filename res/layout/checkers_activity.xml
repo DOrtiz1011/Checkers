@@ -454,4 +454,13 @@
         android:layout_alignTop="@+id/ImageButton76"
         android:layout_toRightOf="@+id/ImageButton76" />
 
+    <Button
+        android:id="@+id/reset_button"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:layout_alignLeft="@+id/ImageButton73"
+        android:layout_alignRight="@+id/ImageButton74"
+        android:layout_below="@+id/ImageButton73"
+        android:text="@string/reset" />
+
 </RelativeLayout>

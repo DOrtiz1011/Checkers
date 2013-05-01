@@ -14,15 +14,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import edu.ncc.checkersapi.CheckerBoard;
+import edu.ncc.checkersapi.CheckerBoard.GameState;
 import edu.ncc.checkersapi.Square;
 import edu.ncc.checkersapi.Square.SquareContents;
 
 public class CheckersActivity extends Activity implements OnClickListener
 {
+   private Button       resetButton      = null;
    private ImageButton  imageButtons[][] = null;
    private CheckerBoard checkerBoard     = null;
    private final String CHECKER_BOARD    = "checkerBoard";
@@ -65,6 +68,9 @@ public class CheckersActivity extends Activity implements OnClickListener
             idIndex++;
          }
       }
+
+      resetButton = (Button) findViewById(R.id.reset_button);
+      resetButton.setOnClickListener(this);
    }
 
    // Checks state of the board for pieces and draws them in the appropriate position on the board.
@@ -92,13 +98,13 @@ public class CheckersActivity extends Activity implements OnClickListener
    @Override
    public void onClick(View arg0)
    {
-      Square selectedSquare = (Square) arg0.getTag();
-      boolean pieceMoved = false;
-
-      selectedSquare.printValidMoves();
-
-      if (!checkerBoard.equals(null))
+      if (checkerBoard != null && checkerBoard.getGameState() == GameState.InPlay && arg0.getId() != R.id.reset_button)
       {
+         Square selectedSquare = (Square) arg0.getTag();
+         boolean pieceMoved = false;
+
+         selectedSquare.printValidMoves();
+
          // highlight the clicked square and available moves
          if (checkerBoard.getSelectedSquare() == null)
          {
@@ -107,6 +113,7 @@ public class CheckersActivity extends Activity implements OnClickListener
          else
          {
             Square temp = checkerBoard.getSelectedSquare();
+
             for (int i = 0; i < 4; i++)
             {
                if (selectedSquare.equals(temp.getValidMoves()[i]))
@@ -115,6 +122,7 @@ public class CheckersActivity extends Activity implements OnClickListener
                   break;
                }
             }
+
             if (pieceMoved)
             {
                String error = checkerBoard.movePiece(temp, selectedSquare);
@@ -125,6 +133,31 @@ public class CheckersActivity extends Activity implements OnClickListener
                checkerBoard.setSelectedSquare(selectedSquare);
             }
          }
+
+         drawBoard();
+      }
+
+      if (checkerBoard.getGameState() == GameState.DarkWins)
+      {
+         displayToast(getString(R.string.dark_wins));
+      }
+      else if (checkerBoard.getGameState() == GameState.LightWins)
+      {
+         displayToast(getString(R.string.light_wins));
+      }
+      else if (checkerBoard.getGameState() == GameState.Draw)
+      {
+         displayToast(getString(R.string.draw));
+      }
+
+      ResetGame(arg0);
+   }
+
+   private void ResetGame(View arg0)
+   {
+      if (arg0.getId() == R.id.reset_button)
+      {
+         checkerBoard.Reset();
          drawBoard();
       }
    }
@@ -172,10 +205,12 @@ public class CheckersActivity extends Activity implements OnClickListener
       else if (square.getSquareContents() == SquareContents.LightKing)
       {
          imageButtons[row][col].setBackgroundColor(Color.BLUE);
+         imageButtons[row][col].setImageResource(R.drawable.light_king);
       }
       else if (square.getSquareContents() == SquareContents.DarkKing)
       {
          imageButtons[row][col].setBackgroundColor(Color.BLUE);
+         imageButtons[row][col].setImageResource(R.drawable.dark_king);
       }
       else if (square.getSquareContents() == SquareContents.Empty && square.isPlayable())
       {

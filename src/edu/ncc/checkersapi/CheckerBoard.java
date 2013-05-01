@@ -19,6 +19,38 @@ public class CheckerBoard implements Serializable
 
    // --------------------------------------------------------------------------------------------------------------
 
+   public enum GameState
+   {
+      InPlay, DarkWins, LightWins, Draw
+   }
+
+   private GameState gameState = GameState.InPlay;
+
+   public GameState getGameState()
+   {
+      return gameState;
+   }
+
+   // --------------------------------------------------------------------------------------------------------------
+
+   public GameState checkWinner()
+   {
+      if (numLightCaptured == 12)
+      {
+         gameState = GameState.DarkWins;
+      }
+      else if (numDarkCaptured == 12)
+      {
+         gameState = GameState.LightWins;
+      }
+
+      // need a case here for a draw if no moves a available
+
+      return gameState;
+   }
+
+   // --------------------------------------------------------------------------------------------------------------
+
    protected String sanityCheck()
    {
       String error = null;
@@ -255,6 +287,8 @@ public class CheckerBoard implements Serializable
          }
       }
 
+      checkWinner();
+
       return sanityCheck();
    }
 
@@ -374,7 +408,7 @@ public class CheckerBoard implements Serializable
                   }
 
                   break;
-                  
+
                case RightEdge:
                   nextSquares[0] = Squares[currRow + direction][currCol - 1];
 
@@ -406,7 +440,7 @@ public class CheckerBoard implements Serializable
             }
 
             // Checks to see if next valid square has a piece in it or not.
-            int[] jumpList = {-1,-1,-1,-1};
+            int[] jumpList = {-1, -1, -1, -1};
             for (int i = 0; i < 4; i++)
             {
                if (nextSquares[i] != null)
@@ -489,33 +523,60 @@ public class CheckerBoard implements Serializable
 
    // Checks to see if a jump is possible. Returns the square to jump to if possible, null if not
    private Square checkForJump(Square square, Square tempSquare)
-   {      
+   {
       int tempRow = tempSquare.getRow();
       int tempCol = tempSquare.getCol();
       int row = square.getRow();
       int col = square.getCol();
-      
-      int rowDirection = 0;
-      if (tempRow - row > 0) rowDirection = 1;
-      else if (tempRow - row < 0) rowDirection = -1;
-      else rowDirection = 0;
-      
-      int colDirection = 0;
-      if (tempCol - col > 0) colDirection = 1;
-      else if (tempCol - col < 0) colDirection = -1;
-      else colDirection = 0;
 
-      if (tempRow + rowDirection < 0 || tempRow + rowDirection > 7) rowDirection = 0;
-      if (tempCol + colDirection < 0 || tempCol + colDirection > 7) colDirection = 0;
-      
-      if (rowDirection == 0 || colDirection == 0) return null;
-      
+      int rowDirection = 0;
+      if (tempRow - row > 0)
+      {
+         rowDirection = 1;
+      }
+      else if (tempRow - row < 0)
+      {
+         rowDirection = -1;
+      }
+      else
+      {
+         rowDirection = 0;
+      }
+
+      int colDirection = 0;
+      if (tempCol - col > 0)
+      {
+         colDirection = 1;
+      }
+      else if (tempCol - col < 0)
+      {
+         colDirection = -1;
+      }
+      else
+      {
+         colDirection = 0;
+      }
+
+      if (tempRow + rowDirection < 0 || tempRow + rowDirection > 7)
+      {
+         rowDirection = 0;
+      }
+      if (tempCol + colDirection < 0 || tempCol + colDirection > 7)
+      {
+         colDirection = 0;
+      }
+
+      if (rowDirection == 0 || colDirection == 0)
+      {
+         return null;
+      }
+
       Square checkSquare = Squares[tempRow + rowDirection][tempCol + colDirection];
       if (checkSquare.getSquareContents() == SquareContents.Empty)
       {
          return checkSquare;
       }
-      
+
       return null;
    }
 
@@ -524,27 +585,34 @@ public class CheckerBoard implements Serializable
       SquareContents temp = sqFrom.getSquareContents();
       sqTo.setSquareContents(temp);
       sqFrom.setSquareContents(SquareContents.Empty);
-      
+
       if (sqTo.getSquareEdgeType() == SquareEdgeType.BottomEdge || sqTo.getSquareEdgeType() == SquareEdgeType.TopEdge)
       {
          temp = sqTo.getSquareContents();
-         
-         if (temp == SquareContents.DarkMan) temp = SquareContents.DarkKing;
-         if (temp == SquareContents.LightMan) temp = SquareContents.LightKing;
-         
+
+         if (temp == SquareContents.DarkMan)
+         {
+            temp = SquareContents.DarkKing;
+         }
+         if (temp == SquareContents.LightMan)
+         {
+            temp = SquareContents.LightKing;
+         }
+
          sqTo.setSquareContents(temp);
       }
-      
+
       if (sqFrom.isJumpAvailable())
       {
          int[] jumpList = sqFrom.getJumpList();
          Square deadSquare = null;
-         for (int i = 0; i < jumpList.length; i++){
+         for (int i = 0; i < jumpList.length; i++)
+         {
             if (sqTo.getPosition() == jumpList[i])
             {
                int rowDirection = sqTo.getRow() - sqFrom.getRow();
                int colDirection = sqTo.getCol() - sqFrom.getCol();
-               
+
                if (rowDirection < 0 && colDirection < 0)
                {
                   deadSquare = Squares[sqTo.getRow() + 1][sqTo.getCol() + 1];
@@ -566,7 +634,7 @@ public class CheckerBoard implements Serializable
          }
          if (deadSquare != null)
          {
-            switch(deadSquare.getSquareContents())
+            switch (deadSquare.getSquareContents())
             {
                case DarkMan:
                case DarkKing:
@@ -580,9 +648,34 @@ public class CheckerBoard implements Serializable
             deadSquare.setSquareContents(SquareContents.Empty);
          }
       }
-      
+
       setSelectedSquare(null);
       switchPlayerTurn();
       return findValidMovesForAllSquares();
+   }
+
+   public void Reset()
+   {
+      numLightMen = 0;
+      numLightKings = 0;
+      numLightCaptured = 0;
+      numDarkMen = 0;
+      numDarkKings = 0;
+      numDarkCaptured = 0;
+      gameState = GameState.InPlay;
+      playerTurn = PlayerTurn.DarksTurn;
+
+      for (int row = 0; row < 8; row++)
+      {
+         for (int col = 0; col < 8; col++)
+         {
+            if (Squares[row][col].isPlayable())
+            {
+               setSquareContents(Squares[row][col], Squares[row][col].getPosition());
+            }
+         }
+      }
+
+      findValidMovesForAllSquares();
    }
 }
