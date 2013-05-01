@@ -582,6 +582,7 @@ public class CheckerBoard implements Serializable
 
    public String movePiece(Square sqFrom, Square sqTo)
    {
+      boolean jumped = false;
       SquareContents temp = sqFrom.getSquareContents();
       sqTo.setSquareContents(temp);
       sqFrom.setSquareContents(SquareContents.Empty);
@@ -646,11 +647,29 @@ public class CheckerBoard implements Serializable
                   break;
             }
             deadSquare.setSquareContents(SquareContents.Empty);
+            jumped = true;
          }
       }
 
-      setSelectedSquare(null);
-      switchPlayerTurn();
+      if (!jumped)
+      {
+         setSelectedSquare(null);
+         switchPlayerTurn();
+      }
+      else
+      {
+         String error = (findValidMovesForAllSquares());
+         if (error != null) return error;
+
+         if (sqTo.isJumpAvailable()){
+            setSelectedSquare(sqTo);
+         }
+         else
+         {
+            setSelectedSquare(null);
+            switchPlayerTurn();
+         }
+      }
       return findValidMovesForAllSquares();
    }
 

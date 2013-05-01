@@ -192,7 +192,7 @@ public class CheckersActivity extends Activity implements OnClickListener
       {
          imageButtons[row][col].setBackgroundColor(Color.GREEN);
       }
-      else if (square.getSquareContents() == SquareContents.LightMan)
+      if (square.getSquareContents() == SquareContents.LightMan)
       {
          imageButtons[row][col].setBackgroundColor(Color.BLUE);
          imageButtons[row][col].setImageResource(R.drawable.light_man);
