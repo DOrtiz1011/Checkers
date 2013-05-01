@@ -9,5 +9,6 @@
     <string name="light_wins">Light Wins</string>
     <string name="draw">Draw</string>
     <string name="reset">Reset</string>
+    <string name="desc"></string>
 
 </resources>
