@@ -130,7 +130,10 @@ public class CheckersActivity extends Activity implements OnClickListener
             }
             else
             {
-               if (!checkerBoard.isDoubleJump()) checkerBoard.setSelectedSquare(selectedSquare);
+               if (!checkerBoard.isDoubleJump())
+               {
+                  checkerBoard.setSelectedSquare(selectedSquare);
+               }
             }
          }
 

@@ -9,13 +9,47 @@ import edu.ncc.checkersapi.Square.SquareEdgeType;
 
 public class CheckerBoard implements Serializable
 {
-   private static final long serialVersionUID = 1L;
-   private int               numLightMen      = 0; // Number of Light Pieces
-   private int               numLightKings    = 0; // Number of Light Kings
-   private int               numLightCaptured = 0; // Number of Captured Light Pieces
-   private int               numDarkMen       = 0; // Number of Dark Pieces
-   private int               numDarkKings     = 0; // Number of Dark Kings
-   private int               numDarkCaptured  = 0; // Number of Captured Dark Pieces
+   private static final long serialVersionUID    = 1L;
+   private int               numLightMen         = 0;    // Number of Light Pieces
+   private int               numLightKings       = 0;    // Number of Light Kings
+   private int               numLightCaptured    = 0;    // Number of Captured Light Pieces
+   private int               numDarkMen          = 0;    // Number of Dark Pieces
+   private int               numDarkKings        = 0;    // Number of Dark Kings
+   private int               numDarkCaptured     = 0;    // Number of Captured Dark Pieces
+   private boolean           lightMovesAvailable = false;
+   private boolean           darkMovesAvailable  = false;
+
+   // --------------------------------------------------------------------------------------------------------------
+
+   void areMovesAvailable(Square square)
+   {
+      if (!lightMovesAvailable && (square.getSquareContents() == SquareContents.LightMan || square.getSquareContents() == SquareContents.LightKing))
+      {
+         Square[] validMoves = square.getValidMoves();
+
+         for (int i = 0; i < validMoves.length; i++)
+         {
+            if (validMoves[i] != null)
+            {
+               lightMovesAvailable = true;
+               break;
+            }
+         }
+      }
+      else if (!darkMovesAvailable && (square.getSquareContents() == SquareContents.DarkMan || square.getSquareContents() == SquareContents.DarkKing))
+      {
+         Square[] validMoves = square.getValidMoves();
+
+         for (int i = 0; i < validMoves.length; i++)
+         {
+            if (validMoves[i] != null)
+            {
+               darkMovesAvailable = true;
+               break;
+            }
+         }
+      }
+   }
 
    // --------------------------------------------------------------------------------------------------------------
 
@@ -35,11 +69,11 @@ public class CheckerBoard implements Serializable
 
    public GameState checkWinner()
    {
-      if (numLightCaptured == 12)
+      if (numLightCaptured == 12 || !lightMovesAvailable)
       {
          gameState = GameState.DarkWins;
       }
-      else if (numDarkCaptured == 12)
+      else if (numDarkCaptured == 12 || !darkMovesAvailable)
       {
          gameState = GameState.LightWins;
       }
@@ -277,6 +311,8 @@ public class CheckerBoard implements Serializable
       numLightKings = 0;
       numDarkMen = 0;
       numDarkKings = 0;
+      lightMovesAvailable = false;
+      darkMovesAvailable = false;
 
       for (int row = 0; row < 8; row++)
       {
@@ -381,6 +417,7 @@ public class CheckerBoard implements Serializable
          {
             currRow = square.getRow();
             currCol = square.getCol();
+
             switch (square.getSquareEdgeType())
             {
                case NonEdge:
@@ -519,6 +556,7 @@ public class CheckerBoard implements Serializable
       }
 
       square.setValidMoves(nextSquares); // Saves the array of squares in the square object.
+      areMovesAvailable(square);
    }
 
    // Checks to see if a jump is possible. Returns the square to jump to if possible, null if not
@@ -581,7 +619,7 @@ public class CheckerBoard implements Serializable
    }
 
    private boolean doubleJump = false;
-   
+
    public String movePiece(Square sqFrom, Square sqTo)
    {
       boolean jumped = false;
@@ -661,9 +699,13 @@ public class CheckerBoard implements Serializable
       else
       {
          String error = (findValidMovesForAllSquares());
-         if (error != null) return error;
+         if (error != null)
+         {
+            return error;
+         }
 
-         if (sqTo.isJumpAvailable()){
+         if (sqTo.isJumpAvailable())
+         {
             setSelectedSquare(sqTo);
             setDoubleJump(true);
          }
@@ -674,10 +716,9 @@ public class CheckerBoard implements Serializable
             switchPlayerTurn();
          }
       }
+
       return findValidMovesForAllSquares();
    }
-   
-   
 
    public void Reset()
    {
@@ -705,11 +746,13 @@ public class CheckerBoard implements Serializable
       findValidMovesForAllSquares();
    }
 
-   public boolean isDoubleJump() {
+   public boolean isDoubleJump()
+   {
       return doubleJump;
    }
 
-   public void setDoubleJump(boolean doubleJump) {
+   public void setDoubleJump(boolean doubleJump)
+   {
       this.doubleJump = doubleJump;
    }
 }
