@@ -191,10 +191,6 @@ public class CheckersActivity extends Activity implements OnClickListener
       int row = square.getRow();
       int col = square.getCol();
 
-      if (square == checkerBoard.getSelectedSquare() && square.getSquareContents() != SquareContents.Empty)
-      {
-         imageButtons[row][col].setBackgroundColor(Color.GREEN);
-      }
       if (square.getSquareContents() == SquareContents.LightMan)
       {
          imageButtons[row][col].setBackgroundColor(Color.BLUE);
@@ -224,6 +220,11 @@ public class CheckersActivity extends Activity implements OnClickListener
       {
          imageButtons[row][col].setBackgroundColor(Color.LTGRAY);
          imageButtons[row][col].setImageResource(0);
+      }
+
+      if (square == checkerBoard.getSelectedSquare() && square.getSquareContents() != SquareContents.Empty)
+      {
+         imageButtons[row][col].setBackgroundColor(Color.GREEN);
       }
    }
 
