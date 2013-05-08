@@ -26,7 +26,7 @@ public class MoveLog
       }
       else
       {
-         newTurn = true;
+         //newTurn = true;
       }
 
       if (jump)

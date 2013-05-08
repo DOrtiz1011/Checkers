@@ -186,6 +186,7 @@ public class CheckersActivity extends Activity implements OnClickListener
 		{
 			checkerBoard.Reset();
 			drawBoard();
+			textView.setText("");
 		}
 	}
 

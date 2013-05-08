@@ -698,6 +698,10 @@ public class CheckerBoard implements Serializable
       {
          setSelectedSquare(null);
          switchPlayerTurn();
+         if (playerTurn == PlayerTurn.LightsTurn)
+         {
+         log.newTurn = true;
+         }
       }
       else
       {
