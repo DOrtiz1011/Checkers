@@ -12,16 +12,16 @@ public class MoveLog
    {
       newTurn = true;
       turn = 0;
-      moveLog = new String();
+      moveLog = new String("");
 
    }
 
-   protected void logMove(int oldPos, int newPos, boolean jump)
+   public void logMove(int oldPos, int newPos, boolean jump)
    {
       if (newTurn)
       {
          turn++;
-         moveLog += "/n" + turn + ". ";
+         moveLog += "\n" + turn + ". ";
          newTurn = false;
       }
       else

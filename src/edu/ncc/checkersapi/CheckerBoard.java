@@ -237,6 +237,7 @@ public class CheckerBoard implements Serializable
    }
 
    public Square[][] Squares;
+   public MoveLog log;
 
    // Setup the board for a new game
    // Default constructor returns a board setup for a new game.
@@ -245,6 +246,8 @@ public class CheckerBoard implements Serializable
    public CheckerBoard()
    {
       int positionIndex = 1;
+      
+      log = new MoveLog();
 
       Squares = new Square[8][8];   // This initializes the pointer for the entire board
 
@@ -715,7 +718,10 @@ public class CheckerBoard implements Serializable
             setDoubleJump(false);
             switchPlayerTurn();
          }
+         
+        
       }
+      log.logMove(sqFrom.getPosition(), sqTo.getPosition(), jumped);
 
       return findValidMovesForAllSquares();
    }

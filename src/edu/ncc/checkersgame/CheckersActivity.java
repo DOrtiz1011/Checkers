@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.ncc.checkersapi.CheckerBoard;
@@ -33,7 +34,8 @@ public class CheckersActivity extends Activity implements OnClickListener
 	private CheckerBoard checkerBoard     = null;
 	private final String CHECKER_BOARD    = "checkerBoard";
 	private boolean      turnTracker      = false;
-
+	private	TextView	 textView		  = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -49,7 +51,8 @@ public class CheckersActivity extends Activity implements OnClickListener
 			byte[] byteArray = savedInstanceState.getByteArray(CHECKER_BOARD);
 			checkerBoard = deserialize(byteArray);
 		}
-
+		
+		
 		createButtons();
 		drawBoard();
 	}
@@ -57,6 +60,7 @@ public class CheckersActivity extends Activity implements OnClickListener
 	// Creates the buttons for the board. Sets the appropriate buttons to be clickable.
 	protected void createButtons()
 	{
+		textView = new TextView(this);
 		imageButtons = new ImageButton[8][8];
 		int idIndex = R.id.imageButton00;
 
@@ -77,6 +81,9 @@ public class CheckersActivity extends Activity implements OnClickListener
 
 		resetButton = (Button) findViewById(R.id.reset_button);
 		resetButton.setOnClickListener(this);
+		textView=(TextView)findViewById(R.id.logText);
+		//textView.setText(checkerBoard.log.toString());
+		
 	}
 
 	// Checks state of the board for pieces and draws them in the appropriate position on the board.
@@ -96,7 +103,10 @@ public class CheckersActivity extends Activity implements OnClickListener
 		{
 			turnTracker = !turnTracker;
 			turnButton.toggle();
+		
 		}
+		
+		
 	}
 
 	@Override
@@ -110,6 +120,7 @@ public class CheckersActivity extends Activity implements OnClickListener
 	@Override
 	public void onClick(View arg0)
 	{
+		
 		if (checkerBoard != null && checkerBoard.getGameState() == GameState.InPlay && arg0.getId() != R.id.reset_button)
 		{
 			Square selectedSquare = (Square) arg0.getTag();
@@ -150,6 +161,7 @@ public class CheckersActivity extends Activity implements OnClickListener
 			}
 
 			drawBoard();
+			textView.setText(checkerBoard.log.toString());
 		}
 
 		if (checkerBoard.getGameState() == GameState.DarkWins)
