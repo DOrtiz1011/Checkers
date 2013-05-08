@@ -9,8 +9,8 @@
         style="@style/button_settings"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/desc" />
 
     <ImageButton
@@ -454,13 +454,41 @@
         android:layout_toRightOf="@+id/ImageButton76"
         android:contentDescription="@string/desc" />
 
+    <Switch
+        android:id="@+id/turnIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignLeft="@+id/ImageButton73"
+        android:layout_alignRight="@+id/ImageButton74"
+        android:layout_below="@+id/ImageButton70"
+        android:enabled="false"
+        android:textOff="Firefox"
+        android:textOn="Chrome" />
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_toLeftOf="@+id/turnIndicator"
+        android:layout_alignTop="@+id/turnIndicator"
+        android:gravity="center"
+        android:text="Player: "/>
+
+    <TextView
+        android:id="@+id/logText"
+        android:layout_width="576dp"
+        android:layout_height="300dp"
+        android:layout_alignLeft="@id/ImageButton71"
+        android:layout_below="@+id/turnIndicator"
+        android:background="#F0F0F0" />
+"
+
     <Button
         android:id="@+id/reset_button"
         android:layout_width="96dp"
         android:layout_height="48dp"
         android:layout_alignLeft="@+id/ImageButton73"
         android:layout_alignRight="@+id/ImageButton74"
-        android:layout_below="@+id/ImageButton73"
+        android:layout_below="@+id/logText"
         android:text="@string/reset" />
 
 </RelativeLayout>
